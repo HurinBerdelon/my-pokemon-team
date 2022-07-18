@@ -5,7 +5,7 @@ import { ErrorMessages } from "../../../../errors/ErrorMessages";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 @injectable()
-class GetUserUseCase {
+export class GetUserUseCase {
 
     constructor(
         @inject('UsersRepository')
@@ -23,5 +23,3 @@ class GetUserUseCase {
         return user
     }
 }
-
-export { GetUserUseCase }

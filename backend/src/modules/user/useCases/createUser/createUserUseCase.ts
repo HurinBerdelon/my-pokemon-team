@@ -1,11 +1,9 @@
-import { hash } from "bcrypt";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../errors/AppError";
 import { CreateUserDTO } from "../../DTO/CreateUserDTO";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 @injectable()
-class CreateUserUseCase {
+export class CreateUserUseCase {
 
     constructor(
         @inject('UsersRepository')
@@ -21,5 +19,3 @@ class CreateUserUseCase {
     }
 
 }
-
-export { CreateUserUseCase }

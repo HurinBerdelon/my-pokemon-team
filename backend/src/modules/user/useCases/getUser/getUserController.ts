@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { GetUserUseCase } from "./getUserUseCase";
 
-class GetUserController {
+export class GetUserController {
 
     async handle(request: Request, response: Response): Promise<Response> {
 
@@ -15,5 +15,3 @@ class GetUserController {
         return response.json(result)
     }
 }
-
-export { GetUserController }

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.85% </span>
+                <span class="strong">85.1% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>38/47</span>
+                <span class='fraction'>40/47</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.85% </span>
+                <span class="strong">85.1% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>38/47</span>
+                <span class='fraction'>40/47</span>
             </div>
         
             
@@ -131,28 +131,28 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span></td><td class="text"><pre class="prettyprint lang-js">import { User } from "@prisma/client";
@@ -188,17 +188,17 @@ export class InMemoryUsersRepository implements IUsersRepository {
 <span class="cstat-no" title="statement not covered" >        return user</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 &nbsp;
-<span class="fstat-no" title="function not covered" >    async updateAvatar(id: string, avatarURL: string): Promise&lt;void&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        const user = this.usersRepository.find(user =&gt; user.id === id)</span>
-<span class="cstat-no" title="statement not covered" >        const userIndex = this.usersRepository.indexOf(user)</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        this.usersRepository.splice(userIndex, 1, { ...user, avatarURL })</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    async updateAvatar(id: string, avatarURL: string): Promise&lt;void&gt; {
+        const user = this.usersRepository.find(user =&gt; user.id === id)
+        const userIndex = this.usersRepository.indexOf(user)
 &nbsp;
-    async delete(id: string): Promise&lt;void&gt; {
-        const userIndex = this.usersRepository.findIndex(user =&gt; user.id === id)
-        this.usersRepository.splice(userIndex, 1)
+        this.usersRepository.splice(userIndex, 1, { ...user, avatarURL })
     }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    async delete(id: string): Promise&lt;void&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        const userIndex = this.usersRepository.findIndex(user =&gt; user.id === id)</span>
+<span class="cstat-no" title="statement not covered" >        this.usersRepository.splice(userIndex, 1)</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 &nbsp;
 &nbsp;
 }</pre></td></tr></table></pre>
@@ -208,7 +208,7 @@ export class InMemoryUsersRepository implements IUsersRepository {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-18T22:16:11.003Z
+                at 2022-07-18T22:52:21.660Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
