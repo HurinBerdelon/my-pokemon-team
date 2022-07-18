@@ -28,7 +28,7 @@ model User {
   name       String
   avatarURL  String
 
-  refreshToken RefreshToken?
+  refreshToken RefreshToken[]
 
   team      Team?
   createdAt DateTime @default(now())
