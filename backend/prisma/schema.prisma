@@ -10,10 +10,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model RefreshToken {
+  id String @unique() @default(uuid())
+
+  value          String //value of the token
+  expirationTime Int //number of seconds
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique()
+
+  createdAt DateTime @default(now())
+}
+
 model User {
   id         String @unique @default(uuid())
   providerId String @unique
   name       String
+  avatarURL  String
+
+  refreshToken RefreshToken?
 
   team      Team?
   createdAt DateTime @default(now())
