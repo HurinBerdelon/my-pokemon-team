@@ -5,13 +5,14 @@ import { IUsersRepository } from "../IUsersRepository";
 
 export class InMemoryUsersRepository implements IUsersRepository {
 
-    private usersRepository: User[] = []
+    usersRepository: User[] = []
 
     async create({ name, providerId }: CreateUserDTO): Promise<void> {
-        await this.usersRepository.push({
+        this.usersRepository.push({
             id: uuidv4(),
             name,
             providerId,
+            avatarURL: null,
             createdAt: new Date(),
             updatedAt: new Date()
 
@@ -19,13 +20,13 @@ export class InMemoryUsersRepository implements IUsersRepository {
     }
 
     async findById(id: string): Promise<User> {
-        const user = await this.usersRepository.find(user => user.id === id)
+        const user = this.usersRepository.find(user => user.id === id)
 
         return user
     }
 
     async findByProviderId(providerId: string): Promise<User> {
-        const user = await this.usersRepository.find(user => user.providerId === providerId)
+        const user = this.usersRepository.find(user => user.providerId === providerId)
 
         return user
     }
@@ -34,7 +35,7 @@ export class InMemoryUsersRepository implements IUsersRepository {
         const user = this.usersRepository.find(user => user.id === id)
         const userIndex = this.usersRepository.indexOf(user)
 
-        this.usersRepository.splice(userIndex, 1, { ...user, }) //avatarURL })
+        this.usersRepository.splice(userIndex, 1, { ...user, avatarURL })
     }
 
     async delete(id: string): Promise<void> {

@@ -26,7 +26,10 @@ export class PrismaUsersRepository implements IUsersRepository {
 
     async findByProviderId(providerId: string): Promise<User> {
         const user = await this.usersRepository.findUnique({
-            where: { providerId }
+            where: { providerId },
+            include: {
+                team: true
+            }
         })
 
         return user
@@ -35,7 +38,7 @@ export class PrismaUsersRepository implements IUsersRepository {
     async updateAvatar(id: string, avatarURL: string): Promise<void> {
         await this.usersRepository.update({
             where: { id },
-            data: {}//avatarURL}
+            data: { avatarURL }
         })
     }
 
@@ -44,6 +47,4 @@ export class PrismaUsersRepository implements IUsersRepository {
             where: { id }
         })
     }
-
-
 }

@@ -16,17 +16,17 @@ model RefreshToken {
   value          String //value of the token
   expirationTime Int //number of seconds
 
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique()
 
   createdAt DateTime @default(now())
 }
 
 model User {
-  id         String @unique @default(uuid())
-  providerId String @unique
+  id         String  @unique @default(uuid())
+  providerId String  @unique
   name       String
-  avatarURL  String
+  avatarURL  String?
 
   refreshToken RefreshToken[]
 
