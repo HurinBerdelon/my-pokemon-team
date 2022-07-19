@@ -11,8 +11,12 @@ export class PrismaUsersRepository implements IUsersRepository {
         await this.usersRepository.create({
             data: {
                 name,
-                providerId
+                providerId,
+                team: {
+                    create: {}
+                }
             }
+
         })
     }
 
@@ -28,7 +32,11 @@ export class PrismaUsersRepository implements IUsersRepository {
         const user = await this.usersRepository.findUnique({
             where: { providerId },
             include: {
-                team: true
+                team: {
+                    include: {
+                        pokemons: true
+                    }
+                }
             }
         })
 
