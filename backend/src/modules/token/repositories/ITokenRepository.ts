@@ -6,4 +6,5 @@ export interface ITokenRepository {
     findByUserId(userId: string): Promise<RefreshToken[]>
     findByValue(value: string): Promise<RefreshToken>
     delete(value: string): Promise<void>
+    deleteExpired(userId: string): Promise<void>
 }

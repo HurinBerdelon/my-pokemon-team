@@ -1,4 +1,5 @@
 import { RefreshToken } from "@prisma/client";
+import dayjs from "dayjs";
 import { CreateTokenDTO } from "../../DTO/CreateTokenDTO";
 import { ITokenRepository } from "../ITokenRepository";
 
@@ -30,5 +31,16 @@ export class InMemoryTokenRepository implements ITokenRepository {
         this.tokensRepository.splice(tokenIndex, 1)
     }
 
+    async deleteExpired(userId: string): Promise<void> {
 
+        const userTokens = this.tokensRepository.filter(token => token.userId === userId)
+
+        userTokens.map(token => {
+            // for each token of user, check if it is expired, if yes, delete it
+            if (token.expiresAt < dayjs().toDate()) {
+                const index = userTokens.indexOf(token)
+                userTokens.splice(index, 1)
+            }
+        })
+    }
 }

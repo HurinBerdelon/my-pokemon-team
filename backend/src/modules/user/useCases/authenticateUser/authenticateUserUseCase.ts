@@ -37,6 +37,8 @@ export class AuthenticateUserUseCase {
             expiresIn: envConfig.JWT_expiration
         })
 
+        await this.tokensRepository.deleteExpired(user.id)
+
         const refreshTokenValue = await hash(uuidv4(), envConfig.hashRounds)
 
         const refreshToken = await this.tokensRepository.create({
