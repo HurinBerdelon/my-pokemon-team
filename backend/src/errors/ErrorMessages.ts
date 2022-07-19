@@ -1,5 +1,7 @@
 export const ErrorMessages = {
     userNotFound: 'User not Found!',
+    tokenAlreadyExists: 'Token Already Exists!',
+    tokenNotFound: 'Token not Found!',
     // invalidToken: 'Invalid Token!',
     // missingToken: 'Token Missing!',
     // incorrectLoginOrPassword: 'Login or Password Invalid!',

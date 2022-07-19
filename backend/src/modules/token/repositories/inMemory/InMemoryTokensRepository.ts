@@ -1,11 +1,12 @@
 import { RefreshToken } from "@prisma/client";
+import { CreateTokenDTO } from "../../DTO/CreateTokenDTO";
 import { ITokenRepository } from "../ITokenRepository";
 
 export class InMemoryTokenRepository implements ITokenRepository {
 
     tokensRepository: RefreshToken[] = []
 
-    async create(value: string, expirationTime: number, userId: string): Promise<void> {
+    async create({ value, expirationTime, userId }: CreateTokenDTO): Promise<void> {
         this.tokensRepository.push({
             value,
             userId,
@@ -14,8 +15,12 @@ export class InMemoryTokenRepository implements ITokenRepository {
         })
     }
 
-    async findByUserId(userId: string): Promise<RefreshToken> {
-        return this.tokensRepository.find(token => token.userId === userId)
+    async findByValue(value: string): Promise<RefreshToken> {
+        return this.tokensRepository.find(token => token.value === value)
+    }
+
+    async findByUserId(userId: string): Promise<RefreshToken[]> {
+        return this.tokensRepository.filter(token => token.userId === userId)
     }
 
     async delete(value: string): Promise<void> {

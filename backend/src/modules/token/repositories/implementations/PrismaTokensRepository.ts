@@ -1,12 +1,13 @@
 import { RefreshToken } from "@prisma/client";
 import { prisma } from "../../../../services/prisma";
+import { CreateTokenDTO } from "../../DTO/CreateTokenDTO";
 import { ITokenRepository } from "../ITokenRepository";
 
 export class PrismaTokensRepository implements ITokenRepository {
 
     private tokensRepository = prisma.refreshToken
 
-    async create(value: string, expirationTime: number, userId: string): Promise<void> {
+    async create({ value, expirationTime, userId }: CreateTokenDTO): Promise<void> {
         await this.tokensRepository.create({
             data: {
                 value,
@@ -16,10 +17,20 @@ export class PrismaTokensRepository implements ITokenRepository {
         })
     }
 
-    async findByUserId(userId: string): Promise<RefreshToken> {
-        const token = await this.tokensRepository.findUnique({
+    async findByUserId(userId: string): Promise<RefreshToken[]> {
+        const token = await this.tokensRepository.findMany({
             where: {
                 userId
+            }
+        })
+
+        return token
+    }
+
+    async findByValue(value: string): Promise<RefreshToken> {
+        const token = await this.tokensRepository.findUnique({
+            where: {
+                value
             }
         })
 
