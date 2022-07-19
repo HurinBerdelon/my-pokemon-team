@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import 'reflect-metadata'
 import { InMemoryTokenRepository } from '../../repositories/inMemory/InMemoryTokensRepository'
 import { CreateTokenUseCase } from './createTokenUseCase'
@@ -18,7 +19,7 @@ describe('Create User', () => {
 
         const token = {
             value: 'hashed-value',
-            expirationTime: 15 * 60, // = 15 minutes
+            expiresAt: dayjs().add(60 * 15, 'seconds').toDate(), // = 15 minutes
             userId: 'user.id'
         }
 

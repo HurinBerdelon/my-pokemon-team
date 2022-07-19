@@ -1,5 +1,5 @@
 export interface CreateTokenDTO {
     value: string
-    expirationTime: number
+    expiresAt: Date
     userId: string
 }

@@ -7,11 +7,11 @@ export class PrismaTokensRepository implements ITokenRepository {
 
     private tokensRepository = prisma.refreshToken
 
-    async create({ value, expirationTime, userId }: CreateTokenDTO): Promise<void> {
-        await this.tokensRepository.create({
+    async create({ value, expiresAt, userId }: CreateTokenDTO): Promise<RefreshToken> {
+        return await this.tokensRepository.create({
             data: {
                 value,
-                expirationTime,
+                expiresAt,
                 userId
             }
         })

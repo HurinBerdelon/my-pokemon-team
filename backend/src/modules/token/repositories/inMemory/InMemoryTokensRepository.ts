@@ -6,13 +6,15 @@ export class InMemoryTokenRepository implements ITokenRepository {
 
     tokensRepository: RefreshToken[] = []
 
-    async create({ value, expirationTime, userId }: CreateTokenDTO): Promise<void> {
+    async create({ value, expiresAt, userId }: CreateTokenDTO): Promise<RefreshToken> {
         this.tokensRepository.push({
             value,
             userId,
-            expirationTime,
+            expiresAt,
             createdAt: new Date()
         })
+
+        return this.tokensRepository.find(token => token.value === value)
     }
 
     async findByValue(value: string): Promise<RefreshToken> {

@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import 'reflect-metadata'
 import { AppError } from '../../../../errors/AppError'
 import { ErrorMessages } from '../../../../errors/ErrorMessages'
@@ -20,7 +21,7 @@ describe('Delete User', () => {
 
         tokensRepositoryInMemory.tokensRepository.push({
             value: 'hashed-value',
-            expirationTime: 15 * 60, // = 15 minutes
+            expiresAt: dayjs().add(15 * 60, 'seconds').toDate(), // = 15 minutes
             userId: 'user.id',
             createdAt: new Date()
         })

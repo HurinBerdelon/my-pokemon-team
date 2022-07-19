@@ -11,8 +11,8 @@ datasource db {
 }
 
 model RefreshToken {
-  value          String @unique() //value of the token
-  expirationTime Int //number of seconds
+  value     String   @unique() //value of the token
+  expiresAt DateTime
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique()

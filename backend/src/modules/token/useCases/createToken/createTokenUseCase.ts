@@ -12,7 +12,7 @@ export class CreateTokenUseCase {
         private tokensRepository: ITokenRepository
     ) { }
 
-    async execute({ expirationTime, userId, value }: CreateTokenDTO): Promise<void> {
+    async execute({ expiresAt, userId, value }: CreateTokenDTO): Promise<void> {
 
         const tokenAlreadyExists = await this.tokensRepository.findByValue(value)
 
@@ -21,7 +21,7 @@ export class CreateTokenUseCase {
         }
 
         await this.tokensRepository.create({
-            expirationTime,
+            expiresAt,
             userId,
             value
         })
