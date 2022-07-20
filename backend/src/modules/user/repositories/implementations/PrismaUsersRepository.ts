@@ -22,7 +22,18 @@ export class PrismaUsersRepository implements IUsersRepository {
 
     async findById(id: string): Promise<User> {
         const user = await this.usersRepository.findUnique({
-            where: { id }
+            where: { id },
+            include: {
+                team: {
+                    include: {
+                        pokemons: {
+                            include: {
+                                pokemon: true
+                            }
+                        }
+                    }
+                }
+            }
         })
 
         return user
