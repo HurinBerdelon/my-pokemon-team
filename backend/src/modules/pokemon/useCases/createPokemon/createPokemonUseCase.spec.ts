@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { InMemoryPokemonsRepository } from '../repositories/inMemory/InMemoryPokemonsRepository'
+import { InMemoryPokemonsRepository } from '../../repositories/inMemory/InMemoryPokemonsRepository'
 import { CreatePokemonUseCase } from './createPokemonUseCase'
 
 let inMemoryPokemonRepository: InMemoryPokemonsRepository

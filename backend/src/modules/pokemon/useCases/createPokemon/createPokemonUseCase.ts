@@ -1,6 +1,6 @@
 import { Pokemon } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
-import { IPokemonRepository } from '../repositories/IPokemonRepository';
+import { IPokemonRepository } from '../../repositories/IPokemonRepository';
 
 @injectable()
 export class CreatePokemonUseCase {
