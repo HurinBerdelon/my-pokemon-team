@@ -7,6 +7,8 @@ import { PrismaTokensRepository } from "../../modules/token/repositories/impleme
 import { ITokenRepository } from "../../modules/token/repositories/ITokenRepository";
 import { PrismaUsersRepository } from "../../modules/user/repositories/implementations/PrismaUsersRepository";
 import { IUsersRepository } from "../../modules/user/repositories/IUsersRepository";
+import { S3StorageProvider } from "../providers/storageProvider/implementations/S3StorageProvider";
+import { IStorageProvider } from "../providers/storageProvider/IStorageProvider";
 
 container.registerSingleton<IUsersRepository>(
     'UsersRepository',
@@ -26,4 +28,14 @@ container.registerSingleton<ITeamRepository>(
 container.registerSingleton<IPokemonRepository>(
     'PokemonsRepository',
     PrismaPokemonRepository
+)
+
+const diskStorage = {
+    // local: LocalStorageProvider,
+    AWS_S3: S3StorageProvider
+}
+
+container.registerSingleton<IStorageProvider>(
+    'StorageProvider',
+    diskStorage[process.env.STORAGE_DISK]
 )
