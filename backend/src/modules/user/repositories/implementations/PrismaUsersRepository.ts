@@ -33,9 +33,9 @@ export class PrismaUsersRepository implements IUsersRepository {
             where: { providerId },
             include: {
                 team: {
-                    include: {
-                        pokemons: true
-                    }
+                    // include: {
+                    //     pokemons: true
+                    // }
                 }
             }
         })
