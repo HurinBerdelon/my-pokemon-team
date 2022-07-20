@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 import { v4 as uuidv4 } from 'uuid'
 import { AppError } from '../../../../errors/AppError'
+import { ErrorMessages } from '../../../../errors/ErrorMessages'
 import { InMemoryPokemonsRepository } from '../../../pokemon/repositories/inMemory/InMemoryPokemonsRepository'
 import { InMemoryTeamsRepository } from '../../repositories/inMemory/inMemoryTeamsRepository'
 import { AddPokemonToTeamUseCase } from './AddPokemonToTeamUseCase'
@@ -52,7 +53,7 @@ describe('AddPokemonToTeam UseCase', () => {
 
         await expect(
             addPokemonToTeamUseCase.execute('pokeId', teamId)
-        ).rejects.toEqual(new AppError('Pokemon already in this team'))
+        ).rejects.toEqual(new AppError(ErrorMessages.pokemonAlreadyOnTeam))
     })
 
     it('should not be able to add a pokemon to the team if the team already has 6 pokemons', async () => {
@@ -75,6 +76,6 @@ describe('AddPokemonToTeam UseCase', () => {
 
         await expect(
             addPokemonToTeamUseCase.execute('pokeId-X', teamId)
-        ).rejects.toEqual(new AppError('Cannot Add more pokemons to this team'))
+        ).rejects.toEqual(new AppError(ErrorMessages.teamComplete))
     })
 })

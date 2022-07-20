@@ -59,11 +59,15 @@ export class InMemoryTeamsRepository implements ITeamRepository {
     }
 
     async removeFromTeam(pokemonId: string, teamId: string): Promise<TeamResponse> {
-        const team = this.teamsRepository.find(team => team.id === teamId)
-        const pokemon = team.pokemons.find(pokemon => pokemon.id === pokemonId)
-        const index = team.pokemons.indexOf(pokemon)
 
-        team.pokemons.splice(index, 1)
+        const team = this.teamsRepository.find(team => team.id === teamId)
+
+        const pokemon = team.pokemons.find(relation => relation.pokemonId === pokemonId)
+        const pokemonIndex = team.pokemons.indexOf(pokemon)
+        team.pokemons.splice(pokemonIndex, 1)
+
+        const teamIndex = this.teamsRepository.indexOf(team)
+        this.teamsRepository.splice(teamIndex, 1, team)
 
         return team
     }

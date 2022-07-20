@@ -2,6 +2,8 @@ export const ErrorMessages = {
     userNotFound: 'User not Found!',
     tokenAlreadyExists: 'Token Already Exists!',
     tokenNotFound: 'Token not Found!',
+    pokemonAlreadyOnTeam: 'Pokemon already in this team',
+    teamComplete: 'Cannot Add more pokemons to this team',
     // invalidToken: 'Invalid Token!',
     // missingToken: 'Token Missing!',
     // incorrectLoginOrPassword: 'Login or Password Invalid!',

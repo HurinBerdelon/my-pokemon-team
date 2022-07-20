@@ -1,6 +1,7 @@
 import { Team } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../errors/AppError';
+import { ErrorMessages } from '../../../../errors/ErrorMessages';
 import { IPokemonRepository } from '../../../pokemon/repositories/IPokemonRepository';
 import { CreatePokemonUseCase } from '../../../pokemon/useCases/createPokemon/createPokemonUseCase';
 import { ITeamRepository, TeamResponse } from '../../repositories/ITeamRepository';
@@ -23,13 +24,13 @@ export class AddPokemonToTeamUseCase {
         const isPokemonOnTeam = await this.teamsRepository.checkForPokemonOnTeam(pokemon.id, teamId)
 
         if (isPokemonOnTeam) {
-            throw new AppError('Pokemon already in this team')
+            throw new AppError(ErrorMessages.pokemonAlreadyOnTeam)
         }
 
         const teamLenght = await this.teamsRepository.teamLenght(teamId)
 
         if (teamLenght === 6) {
-            throw new AppError('Cannot Add more pokemons to this team')
+            throw new AppError(ErrorMessages.teamComplete)
         }
 
         const team = await this.teamsRepository.addToTeam(pokemon.id, teamId, pokeId)
