@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe"
 import { tmpAvatarFolder } from "../../../../config/tmpAvatarFolder"
 import { AppError } from "../../../../errors/AppError"
 import { ErrorMessages } from "../../../../errors/ErrorMessages"
+import { IStorageProvider } from "../../../../shared/providers/storageProvider/IStorageProvider"
 import { deleteFile } from "../../../../utils/file"
 import { IUsersRepository } from "../../repositories/IUsersRepository"
 
@@ -15,7 +16,9 @@ export class UpdateAvatarUseCase {
 
     constructor(
         @inject('UsersRepository')
-        private usersRepository: IUsersRepository
+        private usersRepository: IUsersRepository,
+        @inject('StorageProvider')
+        private storageProvider: IStorageProvider
     ) { }
 
     async execute({ user_id, avatarFile }: IRequest): Promise<void> {
@@ -25,12 +28,24 @@ export class UpdateAvatarUseCase {
             throw new AppError(ErrorMessages.userNotFound, 404)
         }
 
-        const avatarURL = `${tmpAvatarFolder}/${avatarFile}`
+        if (process.env.DEV_ENV) {
+            const avatarURL = `${tmpAvatarFolder}/${avatarFile}`
 
-        if (user.avatarURL) {
-            await deleteFile(`./tmp/avatar/${user.avatarURL}`)
+            if (user.avatarURL) {
+                await deleteFile(user.avatarURL)
+            }
+
+            await this.usersRepository.updateAvatar(user_id, avatarURL)
+        } else {
+
+            if (user.avatarURL) {
+                const avatarNameSplited = user.avatarURL.split('/')
+                const avatarName = avatarNameSplited[avatarNameSplited.length - 1]
+
+                await this.storageProvider.delete('avatar', avatarName)
+            }
+
+            await this.storageProvider.save('avatar', avatarFile)
         }
-
-        await this.usersRepository.updateAvatar(user_id, avatarURL)
     }
 }

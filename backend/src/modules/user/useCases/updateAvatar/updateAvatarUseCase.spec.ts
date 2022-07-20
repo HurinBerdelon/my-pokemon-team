@@ -1,18 +1,24 @@
 import 'reflect-metadata'
 import { AppError } from '../../../../errors/AppError'
 import { ErrorMessages } from '../../../../errors/ErrorMessages'
+import { S3StorageProvider } from '../../../../shared/providers/storageProvider/implementations/S3StorageProvider'
 import { InMemoryUsersRepository } from '../../repositories/inMemory/InMemoryUsersRepository'
 
 import { UpdateAvatarUseCase } from "./updateAvatarUseCase"
 
 let usersRepositoryInMemory: InMemoryUsersRepository
+let storageProvider: S3StorageProvider
 let updateAvatarUseCase: UpdateAvatarUseCase
 
 describe('UpdateAvatar', () => {
 
     beforeEach(() => {
         usersRepositoryInMemory = new InMemoryUsersRepository()
-        updateAvatarUseCase = new UpdateAvatarUseCase(usersRepositoryInMemory)
+        storageProvider = new S3StorageProvider()
+        updateAvatarUseCase = new UpdateAvatarUseCase(
+            usersRepositoryInMemory,
+            storageProvider
+        )
     })
 
     it('should be able to create an User\'s Avatar', async () => {
