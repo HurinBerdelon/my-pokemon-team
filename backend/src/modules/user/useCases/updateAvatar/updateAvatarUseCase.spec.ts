@@ -1,23 +1,25 @@
 import 'reflect-metadata'
 import { AppError } from '../../../../errors/AppError'
 import { ErrorMessages } from '../../../../errors/ErrorMessages'
-import { S3StorageProvider } from '../../../../shared/providers/storageProvider/implementations/S3StorageProvider'
 import { InMemoryUsersRepository } from '../../repositories/inMemory/InMemoryUsersRepository'
 
 import { UpdateAvatarUseCase } from "./updateAvatarUseCase"
 
+const storageProvider_saveSpy = jest.fn(() => {
+    return async (folder: string, file: string) => `${folder}/${file}`
+})
+const storageProvider_deleteSpy = jest.fn()
+
 let usersRepositoryInMemory: InMemoryUsersRepository
-let storageProvider: S3StorageProvider
 let updateAvatarUseCase: UpdateAvatarUseCase
 
 describe('UpdateAvatar', () => {
 
     beforeEach(() => {
         usersRepositoryInMemory = new InMemoryUsersRepository()
-        storageProvider = new S3StorageProvider()
         updateAvatarUseCase = new UpdateAvatarUseCase(
             usersRepositoryInMemory,
-            storageProvider
+            { save: storageProvider_saveSpy(), delete: storageProvider_deleteSpy }
         )
     })
 
@@ -38,6 +40,7 @@ describe('UpdateAvatar', () => {
 
         const userUpdated = usersRepositoryInMemory.usersRepository.find(user => user.providerId === providerId)
 
+        expect(storageProvider_saveSpy).toHaveBeenCalled()
         expect(userUpdated.avatarURL).toBeTruthy()
     })
 
@@ -63,6 +66,8 @@ describe('UpdateAvatar', () => {
 
         const userUpdated = usersRepositoryInMemory.usersRepository.find(user => user.providerId === providerId)
 
+        expect(storageProvider_saveSpy).toHaveBeenCalled()
+        expect(storageProvider_deleteSpy).toHaveBeenCalled()
         expect(userUpdated.avatarURL.includes('newPathForAvatar')).toBeTruthy()
     })
 

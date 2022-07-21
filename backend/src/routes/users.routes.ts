@@ -4,12 +4,12 @@ import multer from 'multer'
 import { GetUserController } from "../modules/user/useCases/getUser/getUserController";
 import { UpdateAvatarController } from "../modules/user/useCases/updateAvatar/updateAvatarController";
 import { DeleteUserController } from "../modules/user/useCases/deleteUser/deleteUserController";
-import { tmpAvatarFolder } from "../config/tmpAvatarFolder";
 import { ensureAuthenticated } from "../middleware/ensuseAuthenticated";
+import { tmpUploadFolder } from "../config/tmpUploadFolder";
 
 const usersRoutes = Router()
 
-const uploadAvatar = multer(uploadConfig.upload(tmpAvatarFolder))
+const uploadAvatar = multer(uploadConfig.upload(tmpUploadFolder))
 
 const getUserController = new GetUserController()
 const updateAvatarController = new UpdateAvatarController()

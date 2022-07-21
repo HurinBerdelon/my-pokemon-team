@@ -3,7 +3,7 @@ import fs from "fs";
 import { IStorageProvider } from "../IStorageProvider";
 import mime from 'mime'
 import { resolve } from "path";
-import { tmpAvatarFolder } from "../../../../config/tmpAvatarFolder";
+import { tmpUploadFolder } from "../../../../config/tmpUploadFolder";
 
 export class S3StorageProvider implements IStorageProvider {
 
@@ -17,7 +17,7 @@ export class S3StorageProvider implements IStorageProvider {
 
     async save(folder: string, file: string): Promise<string> {
 
-        const originalName = resolve(tmpAvatarFolder, file)
+        const originalName = resolve(tmpUploadFolder, file)
 
         const fileContent = await fs.promises.readFile(originalName)
 

@@ -1,4 +1,5 @@
 import { container } from "tsyringe";
+import envConfig from "../../config/envConfig";
 import { PrismaPokemonRepository } from "../../modules/pokemon/repositories/implementations/PrismaPokemonRepository";
 import { IPokemonRepository } from "../../modules/pokemon/repositories/IPokemonRepository";
 import { PrismaTeamRepository } from "../../modules/team/repositories/implementations/PrismaTeamRepository";
@@ -7,6 +8,7 @@ import { PrismaTokensRepository } from "../../modules/token/repositories/impleme
 import { ITokenRepository } from "../../modules/token/repositories/ITokenRepository";
 import { PrismaUsersRepository } from "../../modules/user/repositories/implementations/PrismaUsersRepository";
 import { IUsersRepository } from "../../modules/user/repositories/IUsersRepository";
+import { LocalStorageProvider } from "../providers/storageProvider/implementations/LocalStorageProvider";
 import { S3StorageProvider } from "../providers/storageProvider/implementations/S3StorageProvider";
 import { IStorageProvider } from "../providers/storageProvider/IStorageProvider";
 
@@ -30,12 +32,12 @@ container.registerSingleton<IPokemonRepository>(
     PrismaPokemonRepository
 )
 
-const diskStorage = {
-    // local: LocalStorageProvider,
+const diskStorageProvider = {
+    local: LocalStorageProvider,
     AWS_S3: S3StorageProvider
 }
 
 container.registerSingleton<IStorageProvider>(
     'StorageProvider',
-    diskStorage[process.env.STORAGE_DISK]
+    diskStorageProvider[envConfig.diskStorage]
 )

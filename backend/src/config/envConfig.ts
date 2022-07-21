@@ -7,5 +7,5 @@ export default {
     JWT_expiration: process.env.JWT_EXPIRATION,
     RefreshToken_expires_seconds: 60 * 60 * 24 * 7, // 7 days 
     hashRounds: 8,
-    // APP_PORT: process.env.APP_PORT
+    diskStorage: process.env.DISK_STORAGE
 }
