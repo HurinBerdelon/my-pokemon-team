@@ -50,13 +50,13 @@ export class InMemoryTeamsRepository implements ITeamRepository {
         return team
     }
 
-    async getById(teamId: string): Promise<TeamResponse> {
-        return this.teamsRepository.find(team => team.id === teamId)
-    }
+    // async getById(teamId: string): Promise<TeamResponse> {
+    //     return this.teamsRepository.find(team => team.id === teamId)
+    // }
 
-    async getByUserId(userId: string): Promise<TeamResponse> {
-        return this.teamsRepository.find(team => team.userId === userId)
-    }
+    // async getByUserId(userId: string): Promise<TeamResponse> {
+    //     return this.teamsRepository.find(team => team.userId === userId)
+    // }
 
     async removeFromTeam(pokemonId: string, teamId: string): Promise<TeamResponse> {
 

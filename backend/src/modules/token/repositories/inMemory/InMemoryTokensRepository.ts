@@ -22,9 +22,9 @@ export class InMemoryTokenRepository implements ITokenRepository {
         return this.tokensRepository.find(token => token.value === value)
     }
 
-    async findByUserId(userId: string): Promise<RefreshToken[]> {
-        return this.tokensRepository.filter(token => token.userId === userId)
-    }
+    // async findByUserId(userId: string): Promise<RefreshToken[]> {
+    //     return this.tokensRepository.filter(token => token.userId === userId)
+    // }
 
     async delete(value: string): Promise<void> {
         const tokenIndex = this.tokensRepository.findIndex(token => token.value === value)
@@ -35,12 +35,16 @@ export class InMemoryTokenRepository implements ITokenRepository {
 
         const userTokens = this.tokensRepository.filter(token => token.userId === userId)
 
-        userTokens.map(token => {
+        const invalidTokens = userTokens.map(token => {
             // for each token of user, check if it is expired, if yes, delete it
             if (token.expiresAt < dayjs().toDate()) {
-                const index = userTokens.indexOf(token)
-                userTokens.splice(index, 1)
+                return token
             }
+        }).filter(token => token !== undefined)
+
+        invalidTokens.map(token => {
+            const index = this.tokensRepository.indexOf(token)
+            this.tokensRepository.splice(index, 1)
         })
     }
 }

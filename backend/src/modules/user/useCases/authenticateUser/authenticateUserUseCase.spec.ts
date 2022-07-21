@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import 'reflect-metadata'
 import { InMemoryTokenRepository } from "../../../token/repositories/inMemory/InMemoryTokensRepository"
 import { InMemoryUsersRepository } from "../../repositories/inMemory/InMemoryUsersRepository"
@@ -42,5 +43,30 @@ describe('Authenticate User', () => {
         expect(response).toHaveProperty("user")
         expect(response).toHaveProperty("accessToken")
         expect(response).toHaveProperty("refreshToken")
+    })
+
+    it('should be able to delete all expired tokens from user when user authenticates', async () => {
+
+        const providerId = '3rd-part-userId'
+        const name = 'userNameTest'
+        await usersRepositoryInMemory.create({ providerId, name })
+
+        const user = await usersRepositoryInMemory.findByProviderId(providerId)
+
+        await tokensRepositoryInMemory.create({
+            value: 'someValueExpired',
+            userId: user.id,
+            expiresAt: dayjs().add(-15 * 60, 'seconds').toDate() // 15 minutes 
+        })
+
+        await tokensRepositoryInMemory.create({
+            value: 'someValueExpired2',
+            userId: user.id,
+            expiresAt: dayjs().add(-60 * 60, 'seconds').toDate() // 60 minutes 
+        })
+
+        await authenticateUserUseCase.execute(user.providerId, user.name)
+
+        expect(tokensRepositoryInMemory.tokensRepository.length).toEqual(1)
     })
 })

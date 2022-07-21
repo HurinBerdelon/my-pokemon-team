@@ -18,15 +18,15 @@ export class PrismaTokensRepository implements ITokenRepository {
         })
     }
 
-    async findByUserId(userId: string): Promise<RefreshToken[]> {
-        const token = await this.tokensRepository.findMany({
-            where: {
-                userId
-            }
-        })
+    // async findByUserId(userId: string): Promise<RefreshToken[]> {
+    //     const token = await this.tokensRepository.findMany({
+    //         where: {
+    //             userId
+    //         }
+    //     })
 
-        return token
-    }
+    //     return token
+    // }
 
     async findByValue(value: string): Promise<RefreshToken> {
         const token = await this.tokensRepository.findUnique({

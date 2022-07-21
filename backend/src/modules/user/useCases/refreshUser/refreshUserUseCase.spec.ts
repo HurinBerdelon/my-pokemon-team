@@ -91,4 +91,24 @@ describe('Create refresh Token', () => {
                 accessToken: accessToken
             })).rejects.toEqual(new AppError(ErrorMessages.tokenNotFound, 404))
     })
+
+    it('should not be able to create a new token if there was no old refreshToken', async () => {
+        const providerId = '3rd-part-userId'
+        const name = 'userNameTest'
+
+        await usersRepositoryInMemory.create({ name, providerId })
+
+        const user = await usersRepositoryInMemory.findByProviderId(providerId)
+
+        const accessToken = sign({}, envConfig.JWT_SECRET, {
+            subject: user.id,
+            expiresIn: envConfig.JWT_expiration
+        })
+
+        await expect(
+            refreshUserUseCase.execute({
+                refreshTokenValue: 'inexistent_refresh_token',
+                accessToken: accessToken
+            })).rejects.toEqual(new AppError(ErrorMessages.tokenNotFound, 404))
+    })
 })
