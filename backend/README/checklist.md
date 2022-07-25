@@ -33,7 +33,7 @@
 - [x] Should be able to create a pokemon when user add it to his team
 - [x] Should be able to add pokemons to user's team
 - [x] Should be able to remove pokemons from user's team
-- [ ] Should be able to list all teams
+- [x] Should be able to list all teams
 
 **Business Rules**
 
