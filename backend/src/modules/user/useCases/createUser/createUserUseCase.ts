@@ -1,5 +1,4 @@
 import { inject, injectable } from "tsyringe";
-import { ITeamRepository } from "../../../team/repositories/ITeamRepository";
 import { CreateUserDTO } from "../../DTO/CreateUserDTO";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 

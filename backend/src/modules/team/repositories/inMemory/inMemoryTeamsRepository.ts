@@ -1,4 +1,4 @@
-import { Pokemon, PokemonOnTeams, Team } from "@prisma/client";
+import { PokemonOnTeams } from "@prisma/client";
 import { v4 as uuidv4 } from 'uuid'
 import { ITeamRepository, TeamResponse } from "../ITeamRepository";
 
@@ -50,13 +50,9 @@ export class InMemoryTeamsRepository implements ITeamRepository {
         return team
     }
 
-    // async getById(teamId: string): Promise<TeamResponse> {
-    //     return this.teamsRepository.find(team => team.id === teamId)
-    // }
-
-    // async getByUserId(userId: string): Promise<TeamResponse> {
-    //     return this.teamsRepository.find(team => team.userId === userId)
-    // }
+    async getAllTeams(): Promise<TeamResponse[]> {
+        return this.teamsRepository
+    }
 
     async removeFromTeam(pokemonId: string, teamId: string): Promise<TeamResponse> {
 

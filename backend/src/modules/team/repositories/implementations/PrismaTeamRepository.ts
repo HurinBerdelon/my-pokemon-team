@@ -58,39 +58,19 @@ export class PrismaTeamRepository implements ITeamRepository {
         return team
     }
 
-    // async getById(teamId: string): Promise<TeamResponse> {
-    //     const team = await this.teamsRepository.findUnique({
-    //         where: {
-    //             id: teamId
-    //         },
-    //         include: {
-    //             pokemons: {
-    //                 include: {
-    //                     pokemon: true
-    //                 }
-    //             }
-    //         }
-    //     })
+    async getAllTeams(): Promise<TeamResponse[]> {
+        const teams = await this.teamsRepository.findMany({
+            include: {
+                pokemons: {
+                    include: {
+                        pokemon: true
+                    }
+                }
+            }
+        })
 
-    //     return team
-    // }
-
-    // async getByUserId(userId: string): Promise<TeamResponse> {
-    //     const team = await this.teamsRepository.findUnique({
-    //         where: {
-    //             userId
-    //         },
-    //         include: {
-    //             pokemons: {
-    //                 include: {
-    //                     pokemon: true
-    //                 }
-    //             }
-    //         }
-    //     })
-
-    //     return team
-    // }
+        return teams
+    }
 
     async removeFromTeam(pokemonId: string, teamId: string): Promise<TeamResponse> {
         const pokemonOnTeam = await this.pokemonOnTeamsRepository.findMany({
