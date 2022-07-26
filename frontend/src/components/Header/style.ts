@@ -6,5 +6,8 @@ export const HeaderContainer = styled.header`
     align-items: center;
     padding: 0.5rem;
 
+    background: ${props => props.theme.colors.boxOne};
+    color: ${props => props.theme.colors.textTwo};
+
     position: relative;
 `

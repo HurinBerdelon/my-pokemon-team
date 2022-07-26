@@ -9,7 +9,7 @@ export const ProfileContainer = styled.div`
     .imgContainer {
         width: 85px;
         height: 85px;
-        border: 2px solid;
+        border: 2px solid ${props => props.theme.colors.buttons};
         border-radius: 50%;
 
         img {
@@ -26,11 +26,13 @@ export const ProfileContainer = styled.div`
     }
 
     .profileUpdateButton {
-        background: #0ff;
+        background: ${props => props.theme.colors.buttons};
+        color: ${props => props.theme.colors.textThree};
+        
         padding: 0.25rem 0.75rem;
-        border-radius: 0.25rem;
+        border-radius: 1rem;
     }
 
     padding-bottom: 1rem;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid ${props => props.theme.colors.inputPlaceholder};
 `

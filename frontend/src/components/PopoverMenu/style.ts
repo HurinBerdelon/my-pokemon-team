@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const PopoverMenuContainer = styled.div`
 
     button {
+        color: ${props => props.theme.colors.textTwo};
+        display: flex;
+
         svg {
             font-size: 2rem;
         }
@@ -11,20 +14,25 @@ export const PopoverMenuContainer = styled.div`
     .popoverMenuContent{
         position: absolute;
         right: 0;
-        background: #ff0;
+        background: ${props => props.theme.colors.backgroundTwo};
+        color: ${props => props.theme.colors.textOne};
 
         padding: 0.5rem 1rem;
         
         .logout {
             margin-top: 1rem;
-            border-top: 1px solid;
+            border-top: 1px solid ${props => props.theme.colors.inputPlaceholder};
 
-            text-align: center;
+            display: flex;
+            justify-content: center;
             
             .logoutButton {
-                background: #0ff;
+                margin-top: 1rem;
                 padding: 0.25rem 0.75rem;
-                border-radius: 0.25rem;
+                border-radius: 1rem;
+                
+                background: ${props => props.theme.colors.buttons};
+                color: ${props => props.theme.colors.textThree};
             }
         }
     }
