@@ -21,6 +21,6 @@ Finally you can run `yarn dev` or `npm run dev` to start the API server locally.
 
 ### Documentation
 
-Check the project's requirements <a href="./README/checklist.md" target="_blank">here</a>
+Check the project's requirements <a href="./README/checklist.md" target="_blank">here</a>.
 
-
+OpenAPI documentation: With the project running, go to <a href="http://localhost:3333/docs" target="_blank">/docs</a>.
