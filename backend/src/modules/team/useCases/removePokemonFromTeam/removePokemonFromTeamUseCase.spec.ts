@@ -78,7 +78,7 @@ describe('Remove Pokemon From Team UseCase', () => {
 
         await expect(
             removePokemonFromTeamUseCase.execute(teamId, 'pokeId')
-        ).rejects.toEqual(new AppError(ErrorMessages.pokemonNotFound))
+        ).rejects.toEqual(new AppError(ErrorMessages.pokemonNotFound, 404))
     })
 
     it('should not be able to remove a pokemon from team if the pokemon exists, but is not on the team', async () => {

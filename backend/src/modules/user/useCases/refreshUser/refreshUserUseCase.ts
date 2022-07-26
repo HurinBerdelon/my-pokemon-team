@@ -38,7 +38,7 @@ export class RefreshUserUseCase {
         const oldRefreshToken = await this.tokensRepository.findByValue(refreshTokenValue)
 
         if (!oldRefreshToken) {
-            throw new AppError(ErrorMessages.tokenNotFound, 404)
+            throw new AppError(ErrorMessages.tokenNotFound, 401)
         }
 
         // if (oldRefreshToken.userId != user.id) {

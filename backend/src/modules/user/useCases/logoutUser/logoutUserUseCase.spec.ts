@@ -38,10 +38,4 @@ describe('Logout User', () => {
 
         expect(tokensRepositoryInMemory.tokensRepository.length).toEqual(0)
     })
-
-    it('should not be able to delete a refreshToken if it does not exists', async () => {
-        await expect(
-            logoutUserUseCase.execute('invalid-token')
-        ).rejects.toEqual(new AppError(ErrorMessages.tokenNotFound, 404))
-    })
 })
