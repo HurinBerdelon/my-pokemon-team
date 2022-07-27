@@ -30,6 +30,7 @@ export const ProfileContainer = styled.div`
         color: ${props => props.theme.colors.textThree};
         
         padding: 0.25rem 0.75rem;
+        font-size: 0.85rem;
         border-radius: 1rem;
     }
 

@@ -13,11 +13,12 @@ export const PopoverMenuContainer = styled.div`
 
     .popoverMenuContent{
         position: absolute;
+        z-index: 1;
         right: 0;
         background: ${props => props.theme.colors.backgroundTwo};
         color: ${props => props.theme.colors.textOne};
 
-        padding: 0.5rem 1rem;
+        padding: 1rem 1.5rem;
         
         .logout {
             margin-top: 1rem;
@@ -30,6 +31,8 @@ export const PopoverMenuContainer = styled.div`
                 margin-top: 1rem;
                 padding: 0.25rem 0.75rem;
                 border-radius: 1rem;
+
+                font-size: 0.85rem;
                 
                 background: ${props => props.theme.colors.buttons};
                 color: ${props => props.theme.colors.textThree};
