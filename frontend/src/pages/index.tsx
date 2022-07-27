@@ -2,6 +2,7 @@ import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { FilterInput } from "../components/FilterInput";
 import { Header } from "../components/Header";
+import { Pokemons } from "../components/Pokemons";
 import { useCurrentTheme } from "../hooks/useCurrentTheme";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
 			<ThemeProvider theme={currentTheme}>
 				<Header />
 				<FilterInput />
+				<Pokemons />
 			</ThemeProvider>
 		</>
 	)
