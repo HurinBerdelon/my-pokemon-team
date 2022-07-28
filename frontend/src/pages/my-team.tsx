@@ -18,8 +18,8 @@ export default function MyTeam(): JSX.Element {
 
             <ThemeProvider theme={currentTheme}>
                 <Header />
-                <FilterInput />
                 <Team />
+                <FilterInput />
                 <Pokemons />
             </ThemeProvider>
         </>

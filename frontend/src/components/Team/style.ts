@@ -15,10 +15,10 @@ export const TeamContainer = styled.section`
     .teamContent {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: .75rem;
+        gap: 1rem;
         align-items: center;
         
-        padding: 0.75rem;
+        padding: 0.75rem 1rem;
         
         
         .pokemonContainer {
@@ -30,8 +30,8 @@ export const TeamContainer = styled.section`
             .closeButton {
                 position: absolute;
                 top: -0.75rem;
-                right: -0.5rem;
-                font-size: 1.5rem;
+                right: -0.75rem;
+                font-size: 2rem;
                 color: ${props => props.theme.colors.danger};
             }
 
