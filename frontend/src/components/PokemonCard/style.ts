@@ -11,7 +11,9 @@ export const PokemonCardContainer = styled.div`
     margin: 0.25rem;
     padding: 0.25rem;
 
-    border: 1px solid;
+    /* border: 1px solid; */
+    background: ${props => props.theme.colors.backgroundTwo};
+    border-radius: 0.15rem;
 
     .imgContainer {
         width: 100px;

@@ -20,6 +20,6 @@ export default {
         white: '#FFFFFF',
         gray: '#525254',
 
-        danger: '#9B2726'
+        danger: '#a41f1a'
     }
 }

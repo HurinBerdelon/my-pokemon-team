@@ -31,7 +31,8 @@ export const FilterInputContainer = styled.section`
         gap: 1rem;
         list-style: none;
 
-        background: ${props => props.theme.colors.backgroundTwo};
+        background: ${props => props.theme.colors.boxOne};
+        color: ${props => props.theme.colors.textTwo};
 
         .option {
             display: flex;
