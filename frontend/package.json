@@ -10,17 +10,22 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.6.6",
+    "formik": "^2.2.9",
     "next": "12.2.3",
     "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "styled-components": "^5.3.5"
+    "react-dropzone": "^14.2.2",
+    "styled-components": "^5.3.5",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "18.6.1",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
+    "@types/react-dropzone": "^5.1.0",
     "@types/styled-components": "^5.1.25",
+    "@types/yup": "^0.29.14",
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.3",
     "typescript": "4.7.4"

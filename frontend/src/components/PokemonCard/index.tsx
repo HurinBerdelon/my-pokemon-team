@@ -6,7 +6,7 @@ export function PokemonCard(): JSX.Element {
 
     return (
         <PokemonCardContainer>
-            {/* <PlusCircle weight='fill' className='addButton' tabIndex={0} /> */}
+            <PlusCircle weight='fill' className='addButton' tabIndex={0} />
             <div className="imgContainer">
                 <img src="/pokemon/1.png" alt="Bulbasaur" />
             </div>
@@ -16,9 +16,9 @@ export function PokemonCard(): JSX.Element {
                 <p className="type" style={{ background: `${light.colors.types.grass}` }}>Grass</p>
                 <p className="type" style={{ background: `${light.colors.types.poison}` }}>Poison</p>
             </div>
-            <button className='addButtonBottom'>
+            {/* <button className='addButtonBottom'>
                 Add
-            </button>
+            </button> */}
         </PokemonCardContainer>
     )
 }

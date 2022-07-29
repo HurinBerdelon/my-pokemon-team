@@ -20,7 +20,7 @@ export default {
         white: '#FFFFFF',
         gray: '#525254',
 
-        danger: '#a41f1a',
+        danger: '#C22E28',
         green: '#4e7e42',
 
         types: {
