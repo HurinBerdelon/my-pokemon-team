@@ -28,8 +28,8 @@ export const DropImageContainer = styled.div`
     }
 
     .dragZone {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
         border-radius: 50%;
         border: 2px dashed ${props => props.theme.colors.buttons};
 
@@ -42,6 +42,7 @@ export const DropImageContainer = styled.div`
 
         &:focus {
             p {
+                
                 color: ${props => props.theme.colors.danger};
             }
         }
@@ -53,6 +54,7 @@ export const DropImageContainer = styled.div`
 
         p {
             width: 50%;
+            font-size: 1.35rem;
             text-align: center;
             color: ${props => props.theme.colors.textOne};
         }
