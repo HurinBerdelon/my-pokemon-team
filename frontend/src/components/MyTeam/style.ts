@@ -6,6 +6,23 @@ export const MyTeamContainer = styled.section`
     margin: 0.5rem;
     border-radius: 0.25rem;
     
+    @media (min-width: 540px) {
+        border-radius: 0.5rem;
+        /* margin: 1rem; */
+    }
+
+    @media (min-width: 720px) {
+        max-width: 35%;
+    }
+
+    @media (min-width: 1032px) {
+        max-width: 30%;
+    }
+
+    @media (min-width: 1115px) {
+        max-width: 25%;
+    }
+    
     h2 {
         text-align: center;
         color: ${props => props.theme.colors.textTwo};
@@ -19,12 +36,17 @@ export const MyTeamContainer = styled.section`
         align-items: center;
         
         padding: 0.75rem 1rem;
+
+        @media (min-width: 720px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
         
         
         .pokemonContainer {
             background: ${props => props.theme.colors.boxOne};
             border-radius: 0.5rem;
             position: relative;
+            padding: 0.5rem;
 
             .closeButton {
                 position: absolute;

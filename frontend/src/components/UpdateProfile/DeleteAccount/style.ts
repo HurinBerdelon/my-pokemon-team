@@ -8,6 +8,10 @@ export const DeleteAccountContainer = styled.div`
     padding: 2rem 1rem;
     position: relative;
 
+    @media (min-width: 720px) {
+        margin-right: 2rem;
+    }
+
     .deleteButton {
         color: ${props => props.theme.colors.danger};
         font-size: 1.25rem;

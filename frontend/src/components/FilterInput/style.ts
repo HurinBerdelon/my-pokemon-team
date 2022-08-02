@@ -6,6 +6,10 @@ export const FilterInputContainer = styled.section`
     border: 1px solid ;
     border-radius: 0.25rem;
 
+    @media (min-width: 540px) {
+        margin: 1rem;
+    }
+
     display: flex;
     align-items: center;
     position: relative;

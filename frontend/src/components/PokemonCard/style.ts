@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PokemonCardContainer = styled.div`
 
-    flex: 1;
+    /* flex: 1; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,6 +14,12 @@ export const PokemonCardContainer = styled.div`
 
     background: ${props => props.theme.colors.backgroundTwo};
     border-radius: 0.15rem;
+
+    @media (min-width: 1080px) {
+        .pokemonName {
+            font-size: 1.35rem;
+        }
+    }
 
     .addButton {
         position: absolute;
@@ -47,6 +53,11 @@ export const PokemonCardContainer = styled.div`
         width: 100px;
         height: 100px;
 
+        @media (min-width: 1080px) {
+            width: 150px;
+            height: 150px;
+        }
+
         img {
             object-fit: cover;
             width: 100%;
@@ -56,6 +67,10 @@ export const PokemonCardContainer = styled.div`
     .pokemonNumber {
         font-size: 0.65rem;
         font-weight: 600;
+        
+        @media (min-width: 1080px) {
+            font-size: 1rem;
+        }
     }
 
     .types {
@@ -70,6 +85,10 @@ export const PokemonCardContainer = styled.div`
             padding: 0.1rem 0.25rem;
             border-radius: 0.25rem;
             font-size: .9rem;
+
+            @media (min-width: 1080px) {
+                font-size: 1.125rem;
+            }
         }
     }
 `

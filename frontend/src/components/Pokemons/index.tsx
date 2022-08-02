@@ -10,6 +10,9 @@ export function Pokemons(): JSX.Element {
             <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
             <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
             <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
+            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
+            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
+            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
         </PokemonsContainer>
     )
 }

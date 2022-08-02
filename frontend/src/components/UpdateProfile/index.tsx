@@ -39,8 +39,10 @@ export function UpdateProfile(): JSX.Element {
                             setFieldValue={setFieldValue}
                             errors={errors}
                         />
-                        <h2>Gojou Satoru</h2>
-                        <button className="submitButton" type="submit">Save Avatar</button>
+                        <div className="outsideDrop">
+                            <h2>Gojou Satoru</h2>
+                            <button className="submitButton" type="submit">Save Avatar</button>
+                        </div>
                     </Form>
                 )}
             </Formik>

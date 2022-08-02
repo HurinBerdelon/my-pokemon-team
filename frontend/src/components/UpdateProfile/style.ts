@@ -10,6 +10,18 @@ export const UpdateProfileContainer = styled.section`
         flex-direction: column;
         align-items: center;
 
+        @media (min-width: 720px) {
+            align-self: center;
+            flex-direction: row;
+            gap: 3rem;
+
+            .outsideDrop {
+                display: flex;
+                flex-direction: column;
+                gap: 6rem;
+            }
+        }
+
         h2 {
             color: ${props => props.theme.colors.textOne};
             padding: 1rem 0;
