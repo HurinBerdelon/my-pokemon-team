@@ -7,13 +7,11 @@ export const PokemonCardContainer = styled.div`
     flex-direction: column;
     align-items: center;
 
-    max-width: calc(100%/3 - 1rem);
     margin: 0.5rem;
     padding: 0.5rem;
 
     position: relative;
 
-    /* border: 1px solid; */
     background: ${props => props.theme.colors.backgroundTwo};
     border-radius: 0.15rem;
 
@@ -25,7 +23,15 @@ export const PokemonCardContainer = styled.div`
         color: ${props => props.theme.colors.green};
     }
 
-    .addButtonBottom {
+    .closeButton {
+        position: absolute;
+        top: -0.75rem;
+        right: -0.75rem;
+        font-size: 2rem;
+        color: ${props => props.theme.colors.danger};
+    }
+
+    /* .addButtonBottom {
         width: 100%;
         margin-top: 0.5rem;
         padding: 0.1rem 0.25rem;
@@ -35,7 +41,7 @@ export const PokemonCardContainer = styled.div`
         border-radius: 2rem;
 
         font-weight: 600;
-    }
+    } */
 
     .imgContainer {
         width: 100px;

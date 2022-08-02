@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
-export const TeamContainer = styled.section`
+export const TeamContainer = styled.div`
 
-    background: ${props => props.theme.colors.boxTwo};
-    margin: 0.5rem;
+    background: ${props => props.theme.colors.backgroundOne};
+    margin: 2rem;
     border-radius: 0.25rem;
+    border: 1px solid;
     
     h2 {
         text-align: center;
-        color: ${props => props.theme.colors.textTwo};
-        font-size: 1.25rem;
+        color: ${props => props.theme.colors.textOne};
+        font-size: 1.5rem;
     }
 
     .teamContent {
@@ -19,21 +20,11 @@ export const TeamContainer = styled.section`
         align-items: center;
         
         padding: 0.75rem 1rem;
-        
-        
-        .pokemonContainer {
 
-            background: ${props => props.theme.colors.boxOne};
+        .pokemonContainer {
+            background: ${props => props.theme.colors.backgroundTwo};
             border-radius: 0.5rem;
             position: relative;
-
-            .closeButton {
-                position: absolute;
-                top: -0.75rem;
-                right: -0.75rem;
-                font-size: 2rem;
-                color: ${props => props.theme.colors.danger};
-            }
 
             img {
                 object-fit: cover;
@@ -42,9 +33,8 @@ export const TeamContainer = styled.section`
 
             h4 {
                 text-align: center;
-                color: ${props => props.theme.colors.textTwo};
+                color: ${props => props.theme.colors.textOne};
             }
         }
     }
-
 `

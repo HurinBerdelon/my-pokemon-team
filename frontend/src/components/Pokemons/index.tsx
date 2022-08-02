@@ -5,10 +5,11 @@ export function Pokemons(): JSX.Element {
 
     return (
         <PokemonsContainer>
-            <PokemonCard />
-            <PokemonCard />
-            <PokemonCard />
-            <PokemonCard />
+            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
+            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
+            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
+            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
+            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
         </PokemonsContainer>
     )
 }

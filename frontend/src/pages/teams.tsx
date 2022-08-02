@@ -1,12 +1,10 @@
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
-import { FilterInput } from "../components/FilterInput";
 import { Header } from "../components/Header";
-import { Pokemons } from "../components/Pokemons";
-import { MyTeam } from "../components/MyTeam";
+import { Team } from "../components/Team";
 import { useCurrentTheme } from "../hooks/useCurrentTheme";
 
-export default function MyTeamPage(): JSX.Element {
+export default function MyTeam(): JSX.Element {
 
     const { currentTheme } = useCurrentTheme()
 
@@ -18,9 +16,8 @@ export default function MyTeamPage(): JSX.Element {
 
             <ThemeProvider theme={currentTheme}>
                 <Header />
-                <MyTeam />
-                <FilterInput />
-                <Pokemons />
+                <Team />
+                <Team />
             </ThemeProvider>
         </>
     )

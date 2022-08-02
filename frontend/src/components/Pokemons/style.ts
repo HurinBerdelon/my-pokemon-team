@@ -2,6 +2,6 @@ import styled from "styled-components";
 
 export const PokemonsContainer = styled.main`
 
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 `
