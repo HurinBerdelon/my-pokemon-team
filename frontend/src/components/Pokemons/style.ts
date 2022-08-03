@@ -6,6 +6,12 @@ export const PokemonsContainer = styled.main`
     flex-direction: column;
     margin-bottom: 1rem;
 
+    .loading {
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 1.25rem;
+    }
+
     .pokemonGrid{
         display: grid;
         grid-template-columns: repeat(3, 1fr);

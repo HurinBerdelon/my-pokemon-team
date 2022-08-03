@@ -1,8 +1,9 @@
 import axios from "axios"
+import { useQuery } from "@tanstack/react-query"
 import { PokemonSchema } from "../schema/PokemonSchema"
 
 interface GetPaginatedPokemonReturn {
-    numberOfPages: number
+    totalCount: number
     next: string | null
     pokemons: PokemonSchema[]
 }
@@ -19,11 +20,17 @@ interface AxiosResponseParams {
 }
 
 export async function getPaginatedPokemon(
-    url = 'https://pokeapi.co/api/v2/pokemon',
-    limit = 20,
+    page: number,
+    limit: number,
 ): Promise<GetPaginatedPokemonReturn> {
 
-    const { data }: AxiosResponseParams = await axios.get(`${url}?limit=${limit}`)
+    const url = 'https://pokeapi.co/api/v2/pokemon'
+
+    if (page === 20) {
+        limit = 386 % 20
+    }
+
+    const { data }: AxiosResponseParams = await axios.get(`${url}?offset=${(page - 1) * 20}&limit=${limit}`)
 
     const pokemons = []
 
@@ -32,7 +39,7 @@ export async function getPaginatedPokemon(
 
         pokemons.push({
             id: pokemon.id.toLocaleString('en-US', {
-                minimumIntegerDigits: 3,
+                minimumIntegerDigits: 4,
                 useGrouping: false
             }),
             name: pokemon.name,
@@ -42,8 +49,19 @@ export async function getPaginatedPokemon(
     }
 
     return {
-        numberOfPages: Math.ceil(data.count / limit),
+        totalCount: data.count,
         next: data.next,
         pokemons
     }
+}
+
+export function usePokemons(page: number, limit = 20) {
+
+    return useQuery(
+        [`pokemons_page-${page}`],
+        () => getPaginatedPokemon(page, limit),
+        {
+            staleTime: 1000 * 60 * 60 * 24 * 30, // 30 days
+        }
+    )
 }

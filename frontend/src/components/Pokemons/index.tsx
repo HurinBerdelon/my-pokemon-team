@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PokemonSchema } from "../../schema/PokemonSchema";
-import { getPaginatedPokemon } from "../../services/getPaginatedPokemon";
+import { usePokemons } from "../../services/getPaginatedPokemon";
 import { PokemonCard } from "../PokemonCard";
+import { Pagination } from "./Pagination";
 import { PokemonsContainer } from "./style";
 
 interface PokemonsProps {
     data: {
-        numberOfPages: number
+        totalCount: number
         next: string | null
         pokemons: PokemonSchema[]
     }
@@ -14,15 +15,25 @@ interface PokemonsProps {
 
 export function Pokemons({ data }: PokemonsProps): JSX.Element {
 
+    const [page, setPage] = useState(1)
     const [pokemons, setPokemons] = useState(data.pokemons)
 
-    async function handleLoadMore() {
-        if (data.next) {
-            const { next, pokemons } = await getPaginatedPokemon(data.next)
+    const { data: pokemonList, isLoading, isFetching, error } = usePokemons(page)
 
-            data.next = next
-            setPokemons(prevPokemons => [...prevPokemons, ...pokemons])
+    useEffect(() => {
+        if (pokemonList) {
+            setPokemons(pokemonList.pokemons)
         }
+    }, [pokemonList])
+
+    if (isLoading) {
+        return (
+            <PokemonsContainer>
+                <div className="loading">
+                    Loading...
+                </div>
+            </PokemonsContainer>
+        )
     }
 
     return (
@@ -40,9 +51,11 @@ export function Pokemons({ data }: PokemonsProps): JSX.Element {
                 ))}
             </section>
 
-            {data.next && <button className="loadMoreButton" onClick={handleLoadMore}>
-                Load More
-            </button>}
+            <Pagination
+                onPageChange={setPage}
+                totalCountOfRegisters={386}
+                currentPage={page}
+            />
 
         </PokemonsContainer>
     )
