@@ -1,18 +1,29 @@
+import { PokemonSchema } from "../../schema/PokemonSchema";
 import { PokemonCard } from "../PokemonCard";
 import { PokemonsContainer } from "./style";
 
-export function Pokemons(): JSX.Element {
+interface PokemonsProps {
+    data: {
+        numberOfPages: number
+        next: string | null
+        pokemons: PokemonSchema[]
+    }
+}
+
+export function Pokemons({ data }: PokemonsProps): JSX.Element {
 
     return (
         <PokemonsContainer>
-            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
-            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
-            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
-            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
-            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
-            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
-            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
-            <PokemonCard showAddButton={true} showNumber={true} showTypes={true} />
+            {data?.pokemons.map(pokemon => (
+                <PokemonCard
+                    key={pokemon.id}
+                    pokemon={pokemon}
+                    showAddButton={true}
+                    showNumber={true}
+                    showTypes={true}
+                />
+            ))}
+
         </PokemonsContainer>
     )
 }

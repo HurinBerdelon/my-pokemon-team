@@ -1,8 +1,10 @@
 import { PokemonCardContainer } from "./style";
 import { PlusCircle, XCircle } from "phosphor-react";
 import light from "../../styles/themes/light";
+import { PokemonSchema } from "../../schema/PokemonSchema";
 
 interface PokemonCardProps {
+    pokemon: PokemonSchema
     showAddButton?: boolean
     showRemoveButton?: boolean
     showNumber?: boolean
@@ -10,6 +12,7 @@ interface PokemonCardProps {
 }
 
 export function PokemonCard({
+    pokemon,
     showAddButton = false,
     showRemoveButton = false,
     showNumber = false,
@@ -20,16 +23,19 @@ export function PokemonCard({
     return (
         <PokemonCardContainer>
             <div className="imgContainer">
-                <img src="/pokemon/1.png" alt="Bulbasaur" />
+                <img src={pokemon.imageUrl} alt={pokemon.name} />
             </div>
 
-            {showNumber && <h6 className="pokemonNumber">Number: 001</h6>}
+            {showNumber && <h6 className="pokemonNumber">Number: {pokemon.id}</h6>}
 
-            <h4 className="pokemonName">Bulbasaur</h4>
+            <h4 className="pokemonName">{pokemon.name}</h4>
 
             {showTypes && <div className="types">
-                <p className="type" style={{ background: `${light.colors.types.grass}` }}>Grass</p>
-                <p className="type" style={{ background: `${light.colors.types.poison}` }}>Poison</p>
+                {pokemon.types.map(type => (
+                    <p className="type" style={{
+                        background: `${light.colors.types[type as keyof typeof light.colors.types]}`
+                    }}>{type}</p>
+                ))}
             </div>}
 
             {showAddButton && <PlusCircle weight='fill' className='addButton' tabIndex={0} />}

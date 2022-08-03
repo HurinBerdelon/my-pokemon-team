@@ -15,8 +15,10 @@ export const PokemonCardContainer = styled.div`
     background: ${props => props.theme.colors.backgroundTwo};
     border-radius: 0.15rem;
 
-    @media (min-width: 1080px) {
-        .pokemonName {
+    .pokemonName {
+        text-transform: capitalize;
+
+        @media (min-width: 1080px) {
             font-size: 1.35rem;
         }
     }
@@ -85,6 +87,7 @@ export const PokemonCardContainer = styled.div`
             padding: 0.1rem 0.25rem;
             border-radius: 0.25rem;
             font-size: .9rem;
+            text-transform: capitalize;
 
             @media (min-width: 1080px) {
                 font-size: 1.125rem;
