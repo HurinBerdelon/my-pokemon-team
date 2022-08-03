@@ -11,7 +11,7 @@ import { getPaginatedPokemon } from "../services/getPaginatedPokemon";
 
 interface HomeProps {
 	data: {
-		numberOfPages: number
+		totalCount: number
 		next: string | null
 		pokemons: PokemonSchema[]
 	}
@@ -29,7 +29,7 @@ export default function Home({ data }: HomeProps) {
 
 			<ThemeProvider theme={currentTheme}>
 				<Header />
-				<FilterInput />
+				{/* <FilterInput /> */}
 				<Pokemons data={data} />
 				<ScrollToTop />
 			</ThemeProvider>
@@ -40,7 +40,7 @@ export default function Home({ data }: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
 
-	const data = await getPaginatedPokemon()
+	const data = await getPaginatedPokemon(1, 20)
 
 	return {
 		props: {

@@ -13,7 +13,7 @@ import { ScrollToTop } from "../../components/ScrollToTop";
 
 interface MyTeamProps {
     data: {
-        numberOfPages: number
+        totalCount: number
         next: string | null
         pokemons: PokemonSchema[]
     }
@@ -34,7 +34,7 @@ export default function MyTeamPage({ data }: MyTeamProps): JSX.Element {
                 <MyTeamPageContainer>
                     <MyTeam />
                     <div className="pokemons">
-                        <FilterInput />
+                        {/* <FilterInput /> */}
                         <Pokemons data={data} />
                     </div>
                     <ScrollToTop />
@@ -46,7 +46,7 @@ export default function MyTeamPage({ data }: MyTeamProps): JSX.Element {
 
 export const getServerSideProps: GetServerSideProps = async () => {
 
-    const data = await getPaginatedPokemon()
+    const data = await getPaginatedPokemon(1, 20)
 
     return {
         props: {

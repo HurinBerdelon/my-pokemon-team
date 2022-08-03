@@ -26,6 +26,7 @@ export async function getPaginatedPokemon(
 
     const url = 'https://pokeapi.co/api/v2/pokemon'
 
+    // take only until the number 386, which is the last pokemon of 3rd generation
     if (page === 20) {
         limit = 386 % 20
     }
