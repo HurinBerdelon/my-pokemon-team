@@ -6,18 +6,6 @@ export const PokemonsContainer = styled.main`
     flex-direction: column;
     margin-bottom: 1rem;
 
-    @media (min-width: 720px) {
-        max-width: 63%;
-    }
-
-    @media (min-width: 1032px) {
-        max-width: 68%;
-    }
-
-    @media (min-width: 1115px) {
-        max-width: 73%;
-    }
-
     .pokemonGrid{
         display: grid;
         grid-template-columns: repeat(3, 1fr);

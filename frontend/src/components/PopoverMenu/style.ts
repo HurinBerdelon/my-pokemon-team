@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const PopoverMenuContainer = styled.div`
 
+    @media (min-width: 720px) {
+        display: none;
+    }
+
     button {
         color: ${props => props.theme.colors.textTwo};
         display: flex;
