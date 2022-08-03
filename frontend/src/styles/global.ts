@@ -27,8 +27,8 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        min-width: 100vw;
         min-height: 100vh;
+        /* min-width: 100vw; */
         
         #__next {
             height: 100%;

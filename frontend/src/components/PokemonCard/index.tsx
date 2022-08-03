@@ -32,7 +32,7 @@ export function PokemonCard({
 
             {showTypes && <div className="types">
                 {pokemon.types.map(type => (
-                    <p className="type" style={{
+                    <p key={type} className="type" style={{
                         background: `${light.colors.types[type as keyof typeof light.colors.types]}`
                     }}>{type}</p>
                 ))}

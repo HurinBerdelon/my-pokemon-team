@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { Header } from "../../components/Header";
+import { ScrollToTop } from "../../components/ScrollToTop";
 import { Team } from "../../components/Team";
 import { useCurrentTheme } from "../../hooks/useCurrentTheme";
 import { TeamsPageContainer } from "./style";
@@ -23,6 +24,7 @@ export default function Teams(): JSX.Element {
                     <Team />
                     <Team />
                     <Team />
+                    <ScrollToTop />
                 </TeamsPageContainer>
             </ThemeProvider>
         </>

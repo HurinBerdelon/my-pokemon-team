@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { FilterInput } from "../components/FilterInput";
 import { Header } from "../components/Header";
 import { Pokemons } from "../components/Pokemons";
+import { ScrollToTop } from "../components/ScrollToTop";
 import { useCurrentTheme } from "../hooks/useCurrentTheme";
 import { PokemonSchema } from "../schema/PokemonSchema";
 import { getPaginatedPokemon } from "../services/getPaginatedPokemon";
@@ -30,6 +31,7 @@ export default function Home({ data }: HomeProps) {
 				<Header />
 				<FilterInput />
 				<Pokemons data={data} />
+				<ScrollToTop />
 			</ThemeProvider>
 		</>
 	)
@@ -39,8 +41,6 @@ export default function Home({ data }: HomeProps) {
 export const getStaticProps: GetStaticProps = async () => {
 
 	const data = await getPaginatedPokemon()
-
-	console.log(data)
 
 	return {
 		props: {

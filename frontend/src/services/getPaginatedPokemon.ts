@@ -19,8 +19,8 @@ interface AxiosResponseParams {
 }
 
 export async function getPaginatedPokemon(
+    url = 'https://pokeapi.co/api/v2/pokemon',
     limit = 20,
-    url = 'https://pokeapi.co/api/v2/pokemon'
 ): Promise<GetPaginatedPokemonReturn> {
 
     const { data }: AxiosResponseParams = await axios.get(`${url}?limit=${limit}`)

@@ -10,6 +10,18 @@ export const FilterInputContainer = styled.section`
         margin: 1rem;
     }
 
+    @media (min-width: 720px) {
+        max-width: 61%;
+    }
+
+    @media (min-width: 1032px) {
+        max-width: 66%;
+    }
+
+    @media (min-width: 1115px) {
+        max-width: 71%;
+    }
+
     display: flex;
     align-items: center;
     position: relative;

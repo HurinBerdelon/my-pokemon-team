@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 export const MyTeamContainer = styled.section`
 
-    background: ${props => props.theme.colors.boxTwo};
+    background: ${props => props.theme.colors.boxOne};
     margin: 0.5rem;
     border-radius: 0.25rem;
+    height: fit-content;
     
     @media (min-width: 540px) {
         border-radius: 0.5rem;
@@ -13,6 +14,8 @@ export const MyTeamContainer = styled.section`
 
     @media (min-width: 720px) {
         max-width: 35%;
+        position: fixed;
+        right: 0;
     }
 
     @media (min-width: 1032px) {
@@ -43,7 +46,7 @@ export const MyTeamContainer = styled.section`
         
         
         .pokemonContainer {
-            background: ${props => props.theme.colors.boxOne};
+            background: ${props => props.theme.colors.boxTwo};
             border-radius: 0.5rem;
             position: relative;
             padding: 0.5rem;
