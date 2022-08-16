@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
+import { useSession } from 'next-auth/react'
 import { ThemeProvider } from "styled-components";
-import { FilterInput } from "../components/FilterInput";
 import { Header } from "../components/Header";
 import { Pokemons } from "../components/Pokemons";
 import { ScrollToTop } from "../components/ScrollToTop";
@@ -20,6 +20,7 @@ interface HomeProps {
 export default function Home({ data }: HomeProps) {
 
 	const { currentTheme } = useCurrentTheme()
+	const { data: session } = useSession()
 
 	return (
 		<>
