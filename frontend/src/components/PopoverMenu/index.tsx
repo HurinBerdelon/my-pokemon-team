@@ -3,6 +3,7 @@ import { Popover } from '@headlessui/react'
 import { PopoverMenuContainer } from "./style";
 import { Menu } from '../Menu';
 import { Profile } from '../Profile';
+import { signOut } from 'next-auth/react';
 
 export function PopoverMenu(): JSX.Element {
 
@@ -16,7 +17,10 @@ export function PopoverMenu(): JSX.Element {
                     <Profile />
                     <Menu />
                     <div className="logout">
-                        <button className="logoutButton">
+                        <button className="logoutButton" onClick={() => {
+                            console.log('logout')
+                            // signOut({ callbackUrl: 'http://localhost:3000/' })
+                        }}>
                             Logout
                         </button>
                     </div>
