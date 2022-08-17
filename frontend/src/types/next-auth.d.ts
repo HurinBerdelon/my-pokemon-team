@@ -6,7 +6,7 @@ declare module 'next-auth' {
         user: {
             providerId: string,
             name: string,
-            imageUrl: string,
+            image: string,
         }
     }
 }

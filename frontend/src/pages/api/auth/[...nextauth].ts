@@ -1,8 +1,6 @@
 import NextAuth from "next-auth/next";
 import GoogleProvider from 'next-auth/providers/google'
 import FacebookProvider from 'next-auth/providers/facebook'
-import { setCookie } from 'nookies'
-import { api } from "../../../services/api";
 
 export default NextAuth({
     providers: [

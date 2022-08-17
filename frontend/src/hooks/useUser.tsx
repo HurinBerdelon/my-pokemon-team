@@ -1,6 +1,6 @@
 import { Session } from "next-auth"
 import { destroyCookie, parseCookies, setCookie } from "nookies"
-import { createContext, ReactNode, useContext, useState } from "react"
+import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { appKeys } from "../config/AppKeys"
 import { api } from "../services/api"
 
@@ -46,7 +46,7 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
             setUser({
                 name: response.data.user.name,
                 providerId: session.user.providerId,
-                imageURL: session.user.imageUrl
+                imageURL: session.user.image
             })
         }).catch(error => console.log(error))
     }

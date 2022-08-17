@@ -43,11 +43,11 @@ export const HeaderContainer = styled.header`
 
             padding: 1rem 1.5rem;
             
-            .logout {
+            .logout, .login {
                 display: flex;
                 justify-content: center;
                 
-                .logoutButton {
+                .logoutButton, .loginButton {
                     margin-top: 1rem;
                     padding: 0.25rem 0.75rem;
                     border-radius: 1rem;

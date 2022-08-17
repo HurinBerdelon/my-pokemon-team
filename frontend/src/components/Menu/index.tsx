@@ -1,7 +1,10 @@
 import Link from "next/link";
+import { useUser } from "../../hooks/useUser";
 import { MenuContainer } from "./style";
 
 export function Menu(): JSX.Element {
+
+    const { user } = useUser()
 
     return (
         <MenuContainer>
@@ -12,9 +15,11 @@ export function Menu(): JSX.Element {
                 <a>Teams</a>
             </Link>
 
-            <Link href='/my-team'>
-                <a>My Team</a>
-            </Link>
+            {user && (
+                <Link href='/my-team'>
+                    <a>My Team</a>
+                </Link>
+            )}
         </MenuContainer>
     )
 }
