@@ -7,7 +7,7 @@ export class RefreshUserController {
 
     async handle(request: Request, response: Response): Promise<Response> {
 
-        const accessToken = request.headers[tokenHeader.accessToken] as string
+        const [_, accessToken] = request.headers.authorization.split(' ')
         const refreshToken = request.headers[tokenHeader.refreshToken] as string
 
         const refreshUserUseCase = container.resolve(RefreshUserUseCase)
