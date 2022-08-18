@@ -1,5 +1,3 @@
-import axios from "axios";
+import { setupAPIClient } from "./setupApi";
 
-export const api = axios.create({
-    baseURL: 'http://localhost:3333/'
-})
+export const api = setupAPIClient()

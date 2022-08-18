@@ -6,15 +6,13 @@ import { useUser } from "../../hooks/useUser"
 export default function LoginCallback() {
 
     const { data: session } = useSession()
-    const { authenticate, isAuthenticated } = useUser()
+    const { authenticate } = useUser()
     const router = useRouter()
 
     useEffect(() => {
         if (session) {
             authenticate(session)
-            isAuthenticated
-                ? router.push('/my-team')
-                : router.push('/')
+            router.push('/my-team')
         }
     }, [session])
 }

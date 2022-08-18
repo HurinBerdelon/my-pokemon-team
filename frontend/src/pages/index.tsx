@@ -31,8 +31,8 @@ export default function Home({ data }: HomeProps) {
 			<ThemeProvider theme={currentTheme}>
 				<Header />
 				{/* <FilterInput /> */}
-				<Pokemons data={data} />
-				<ScrollToTop />
+				{/* <Pokemons data={data} /> */}
+				{/* <ScrollToTop /> */}
 			</ThemeProvider>
 		</>
 	)
