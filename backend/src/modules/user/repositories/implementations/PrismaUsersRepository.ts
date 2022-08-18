@@ -7,11 +7,12 @@ export class PrismaUsersRepository implements IUsersRepository {
 
     private usersRepository = prisma.user
 
-    async create({ name, providerId }: CreateUserDTO): Promise<void> {
+    async create({ name, providerId, imageUrl }: CreateUserDTO): Promise<void> {
         await this.usersRepository.create({
             data: {
                 name,
                 providerId,
+                avatarURL: imageUrl,
                 team: {
                     create: {}
                 }
