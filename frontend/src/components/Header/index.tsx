@@ -1,5 +1,5 @@
 import { Popover } from "@headlessui/react";
-import { signIn, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
 import { LoginModal } from "../LoginModal";
@@ -10,7 +10,7 @@ import { HeaderContainer } from "./style";
 
 export function Header(): JSX.Element {
 
-    const { user } = useUser()
+    const { user, revokeAuthentication } = useUser()
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
     return (
@@ -27,7 +27,8 @@ export function Header(): JSX.Element {
                     <Popover.Button className="profileButton">
                         <div className="miniImgContainer">
                             {user
-                                ? <img src={user.imageURL} alt="profile" />
+                                // ? <img src={user.imageURL} alt="profile" />
+                                ? <img src="/avatar/Gojou.jpg" alt="profile" />
                                 : <img src="/avatar/user.png" alt="profile" />
                             }
                         </div>
@@ -48,7 +49,7 @@ export function Header(): JSX.Element {
                             <div className="logout">
                                 <button
                                     className="logoutButton"
-                                    onClick={() => signOut({ callbackUrl: '/auth/logout_callback' })}
+                                    onClick={() => revokeAuthentication()}
                                 >
                                     Logout
                                 </button>

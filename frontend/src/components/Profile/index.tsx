@@ -11,7 +11,7 @@ export function Profile(): JSX.Element {
     return (
         <ProfileContainer>
             <div className="imgContainer">
-                {user
+                {user?.imageURL
                     ? <img src={user.imageURL} alt="profile" />
                     : <img src="/avatar/user.png" alt="profile" />
                 }

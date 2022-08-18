@@ -23,6 +23,8 @@ export const ProfileContainer = styled.div`
 
     .profileName {
         font-size: 1.25rem;
+        max-width: 200px;
+        text-align: center;
     }
 
     .profileUpdateButton {
