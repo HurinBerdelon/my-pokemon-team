@@ -4,3 +4,9 @@ export interface PokemonSchema {
     types: string[]
     imageUrl: string
 }
+
+export interface TeamSchema {
+    id: string
+    userId: string
+    pokemons: PokemonSchema[]
+}
