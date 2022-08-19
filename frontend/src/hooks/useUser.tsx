@@ -4,20 +4,15 @@ import { useRouter } from "next/router"
 import { destroyCookie, parseCookies, setCookie } from "nookies"
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { appKeys } from "../config/AppKeys"
+import { UserSchema } from "../schema/UserSchema"
 import { api } from "../services/api"
-
-interface User {
-    name: string
-    providerId: string
-    imageURL: string
-}
 
 interface UserProviderProps {
     children: ReactNode
 }
 
 interface UserContextData {
-    user: User | undefined
+    user: UserSchema | undefined
     isAuthenticated: boolean
     authenticate: (session: Session) => void
     revokeAuthentication: () => void
@@ -27,7 +22,7 @@ const userContext = createContext<UserContextData>({} as UserContextData)
 
 export function UserProvider({ children }: UserProviderProps): JSX.Element {
 
-    const [user, setUser] = useState<User | undefined>()
+    const [user, setUser] = useState<UserSchema | undefined>()
     const router = useRouter()
     const isAuthenticated = !!user
 
@@ -35,7 +30,6 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
         const cookies = parseCookies()
         const accessToken = cookies[appKeys.accessTokenKey]
         if (accessToken) {
-            console.log('fetching user')
             api.get('/users/me')
                 .then(response => {
                     setUser(response.data)
@@ -46,7 +40,8 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
     function authenticate(session: Session) {
         api.post('session', {
             name: session.user.name,
-            providerId: session.user.providerId
+            providerId: session.user.providerId,
+            imageUrl: session.user.image
         }).then(response => {
             setCookie(undefined, appKeys.accessTokenKey, response.data.accessToken, {
                 maxAge: 60 * 60 * 24 * 7, // 7 days

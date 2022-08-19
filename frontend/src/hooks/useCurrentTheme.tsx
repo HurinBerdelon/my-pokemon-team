@@ -8,12 +8,12 @@ interface ThemeProviderProps {
     children: ReactNode
 }
 
-interface ThemeContextProps {
+interface ThemeContextData {
     currentTheme: DefaultTheme
     toggleCurrentTheme(): void
 }
 
-const ThemeContext = createContext<ThemeContextProps>({} as ThemeContextProps)
+const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData)
 
 export function CurrentThemeProvider({ children }: ThemeProviderProps): JSX.Element {
 
