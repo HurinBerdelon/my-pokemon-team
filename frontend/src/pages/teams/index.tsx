@@ -19,11 +19,11 @@ export default function Teams(): JSX.Element {
             <ThemeProvider theme={currentTheme}>
                 <Header />
                 <TeamsPageContainer>
+                    {/* <Team />
                     <Team />
                     <Team />
                     <Team />
-                    <Team />
-                    <Team />
+                    <Team /> */}
                     <ScrollToTop />
                 </TeamsPageContainer>
             </ThemeProvider>
