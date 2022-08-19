@@ -1,42 +1,28 @@
-import { PokemonCard } from "../PokemonCard";
+import { PokemonSchema } from "../../schema/PokemonSchema";
 import { TeamContainer } from "./style";
 
 interface TeamProps {
     username: string
-    team: any // TODO
+    team: {
+        id: string
+        pokemons: PokemonSchema[]
+    }
 }
 
-export function Team(): JSX.Element {
+export function Team({ username, team }: TeamProps): JSX.Element {
 
     return (
         <TeamContainer>
-            <h2>User's Team</h2>
+            <h2>{`${username}'s Team`}</h2>
 
             <div className="teamContent">
-                <div className="pokemonContainer">
-                    <img src="pokemon/1.png" alt="Bulbasaur" />
-                    <h4>Bulbasaur</h4>
-                </div>
-                <div className="pokemonContainer">
-                    <img src="pokemon/1.png" alt="Bulbasaur" />
-                    <h4>Bulbasaur</h4>
-                </div>
-                <div className="pokemonContainer">
-                    <img src="pokemon/1.png" alt="Bulbasaur" />
-                    <h4>Bulbasaur</h4>
-                </div>
-                <div className="pokemonContainer">
-                    <img src="pokemon/1.png" alt="Bulbasaur" />
-                    <h4>Bulbasaur</h4>
-                </div>
-                <div className="pokemonContainer">
-                    <img src="pokemon/1.png" alt="Bulbasaur" />
-                    <h4>Bulbasaur</h4>
-                </div>
-                <div className="pokemonContainer">
-                    <img src="pokemon/1.png" alt="Bulbasaur" />
-                    <h4>Bulbasaur</h4>
-                </div>
+
+                {team.pokemons.map(pokemon => (
+                    <div className="pokemonContainer" key={pokemon.id}>
+                        <img src={pokemon.imageUrl} alt={pokemon.name} />
+                        <h4>{pokemon.name}</h4>
+                    </div>
+                ))}
             </div>
         </TeamContainer>
     )

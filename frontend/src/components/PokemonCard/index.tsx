@@ -20,6 +20,10 @@ export function PokemonCard({
 
 }: PokemonCardProps): JSX.Element {
 
+    async function handleAddPokemon(id: string): Promise<void> {
+        console.log(Number(id))
+    }
+
     return (
         <PokemonCardContainer>
             <div className="imgContainer">
@@ -38,7 +42,13 @@ export function PokemonCard({
                 ))}
             </div>}
 
-            {showAddButton && <PlusCircle weight='fill' className='addButton' tabIndex={0} />}
+            {showAddButton
+                && <PlusCircle
+                    weight='fill'
+                    className='addButton'
+                    tabIndex={0}
+                    onClick={() => handleAddPokemon(pokemon.id)}
+                />}
             {showRemoveButton && <XCircle className="closeButton" tabIndex={0} weight='fill' />}
             {/* <button className='addButtonBottom'>
                 Add

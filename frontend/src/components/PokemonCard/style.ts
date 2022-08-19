@@ -29,6 +29,11 @@ export const PokemonCardContainer = styled.div`
         right: -.75rem;
         font-size: 2rem;
         color: ${props => props.theme.colors.green};
+
+        &:hover {
+            cursor: pointer;
+            filter: brightness(1.2);
+        }
     }
 
     .closeButton {
