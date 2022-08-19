@@ -6,6 +6,7 @@ import { useUser } from "./useUser";
 interface TeamContextData {
     myTeam: TeamSchema | undefined
     teams: TeamSchema[] | undefined
+    getTeams: () => void
 }
 
 interface TeamProviderProps {
@@ -18,21 +19,36 @@ export function TeamProvider({ children }: TeamProviderProps): JSX.Element {
 
     const { user } = useUser()
     const [myTeam, setMyTeam] = useState<TeamSchema>()
-    const [teams, setTeams] = useState<TeamSchema[]>()
+    const [teams, setTeams] = useState<TeamSchema[]>([])
 
     useEffect(() => {
-        if (user?.team) {
+        if (user) {
             setMyTeam(user.team)
         }
+        getTeams()
     }, [user])
 
     async function getTeams() {
-        const response = await api.get('/team')
-        console.log(response.data)
+        api.get('/team')
+            .then(response => {
+                response.data.map(async (team: TeamSchema) => {
+                    const response = await api.get(`/users/${team.userId}`)
+                    if (teams) {
+                        setTeams(prevTeams =>
+                            [
+                                {
+                                    ...team,
+                                    userName: response.data.name
+                                },
+                                ...prevTeams
+                            ])
+                    }
+                })
+            })
     }
 
     return (
-        <TeamContext.Provider value={{ myTeam, teams }}>
+        <TeamContext.Provider value={{ myTeam, teams, getTeams }}>
             {children}
         </TeamContext.Provider>
     )

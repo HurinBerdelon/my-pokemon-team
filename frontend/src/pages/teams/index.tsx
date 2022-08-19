@@ -1,30 +1,43 @@
 import Head from "next/head";
+import { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { Header } from "../../components/Header";
 import { ScrollToTop } from "../../components/ScrollToTop";
 import { Team } from "../../components/Team";
 import { useCurrentTheme } from "../../hooks/useCurrentTheme";
+import { useTeam } from "../../hooks/useTeams";
 import { TeamsPageContainer } from "./style";
 
 export default function Teams(): JSX.Element {
 
     const { currentTheme } = useCurrentTheme()
+    const { teams } = useTeam()
 
     return (
         <>
             <Head>
-                <title>My Team | My Pokemon Team</title>
+                <title>Teams | My Pokemon Team</title>
             </Head>
 
             <ThemeProvider theme={currentTheme}>
                 <Header />
                 <TeamsPageContainer>
-                    {/* <Team />
-                    <Team />
-                    <Team />
-                    <Team />
-                    <Team /> */}
-                    <ScrollToTop />
+                    <>
+                        {teams
+                            ? teams.map(team => (
+                                <Team
+                                    key={team.id}
+                                    team={team}
+                                />
+                            ))
+                            : (
+                                <div className="noTeamYet">
+                                    <p>There is no team yet.</p>
+                                </div>
+                            )
+                        }
+                        <ScrollToTop />
+                    </>
                 </TeamsPageContainer>
             </ThemeProvider>
         </>

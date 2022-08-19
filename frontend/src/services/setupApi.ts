@@ -5,11 +5,13 @@ import { parseCookies, setCookie } from "nookies";
 import { appKeys } from "../config/AppKeys";
 import { AuthTokenError } from "./errors/errors";
 
-let isRefreshing = false
-let failedRequestQueue: {
+interface QueueObjectProps {
     onSucess: (token: string) => void
     onFailure: (error: AxiosError) => void
-}[] = []
+}
+
+let isRefreshing = false
+let failedRequestQueue: QueueObjectProps[] = []
 
 export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = undefined) {
 
@@ -27,15 +29,18 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
         error => {
             if (error.response.status === 401) {
                 if (error.response.data?.message === 'Invalid Token!') {
+                    console.log('invalid token')
 
                     const originalConfig = error.config
 
                     if (!isRefreshing) {
 
+                        console.log('is refreshing')
                         cookies = parseCookies(ctx)
                         const refreshToken = cookies[appKeys.refreshTokenKey]
 
                         isRefreshing = true
+                        console.log(refreshToken)
 
                         api.post('/refresh', {}, {
                             headers: {
@@ -53,11 +58,14 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
                                 path: '/'
                             })
 
-                            api.defaults.headers.common['Authorization'] = `Beaerer ${response.data.accessToken}`
+                            api.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`
+
+                            console.log('Queue:', failedRequestQueue)
 
                             failedRequestQueue.forEach(request => request.onSucess(response.data.accessToken))
                             failedRequestQueue = []
                         }).catch(error => {
+                            console.log('Refresh Failed')
                             failedRequestQueue.forEach(request => request.onFailure(error))
                             failedRequestQueue = []
                         }).finally(() => {
@@ -79,7 +87,8 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
                     })
                 } else {
                     if (typeof window !== 'undefined') {
-                        signOut({ callbackUrl: '/auth/logout_callback' })
+
+                        signOut()
                     } else {
                         return Promise.reject(new AuthTokenError())
                     }

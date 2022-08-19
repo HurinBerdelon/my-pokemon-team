@@ -8,5 +8,6 @@ export interface PokemonSchema {
 export interface TeamSchema {
     id: string
     userId: string
+    userName: string
     pokemons: PokemonSchema[]
 }

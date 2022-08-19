@@ -10,6 +10,8 @@ import { GetServerSideProps } from "next";
 import { getPaginatedPokemon } from "../../services/getPaginatedPokemon";
 import { PokemonSchema } from "../../schema/PokemonSchema";
 import { ScrollToTop } from "../../components/ScrollToTop";
+import { useUser } from "../../hooks/useUser";
+import { useRouter } from "next/router";
 
 interface MyTeamProps {
     data: {
@@ -22,6 +24,13 @@ interface MyTeamProps {
 export default function MyTeamPage({ data }: MyTeamProps): JSX.Element {
 
     const { currentTheme } = useCurrentTheme()
+    const { user } = useUser()
+    const router = useRouter()
+
+    if (!user) {
+        router.push('/')
+        return <></>
+    }
 
     return (
         <>
@@ -32,7 +41,7 @@ export default function MyTeamPage({ data }: MyTeamProps): JSX.Element {
             <ThemeProvider theme={currentTheme}>
                 <Header />
                 <MyTeamPageContainer>
-                    <MyTeam />
+                    <MyTeam user={user} />
                     <div className="pokemons">
                         {/* <FilterInput /> */}
                         <Pokemons data={data} />
@@ -47,6 +56,8 @@ export default function MyTeamPage({ data }: MyTeamProps): JSX.Element {
 export const getServerSideProps: GetServerSideProps = async () => {
 
     const data = await getPaginatedPokemon(1, 20)
+
+    // Redirect to home if not authenticated on serverside
 
     return {
         props: {

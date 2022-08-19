@@ -1,17 +1,12 @@
 import { MyTeamContainer } from "./style";
 import { XCircle } from "phosphor-react";
-import { useUser } from "../../hooks/useUser";
-import { useRouter } from "next/router";
+import { UserSchema } from "../../schema/UserSchema";
 
-export function MyTeam(): JSX.Element {
+interface MyTeamProps {
+    user: UserSchema
+}
 
-    const { user } = useUser()
-    const router = useRouter()
-
-    if (!user) {
-        router.push('/')
-        return (<></>)
-    }
+export function MyTeam({ user }: MyTeamProps): JSX.Element {
 
     async function handleRemovePokemon(id: string): Promise<void> {
         console.log(id)
