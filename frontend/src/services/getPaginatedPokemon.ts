@@ -40,7 +40,7 @@ export async function getPaginatedPokemon(
 
         pokemons.push({
             id: pokemon.id.toLocaleString('en-US', {
-                minimumIntegerDigits: 4,
+                minimumIntegerDigits: 3,
                 useGrouping: false
             }),
             name: pokemon.name,
