@@ -27,6 +27,9 @@ export class RefreshUserUseCase {
 
     async execute({ accessToken, refreshTokenValue }): Promise<IResponse> {
 
+        // console.log('refreshUseCase', accessToken)
+        // console.log(refreshTokenValue)
+
         const { sub: userId } = decode(accessToken) as { sub: string }
 
         const user = await this.usersRepository.findById(userId)

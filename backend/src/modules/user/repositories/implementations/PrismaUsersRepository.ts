@@ -46,7 +46,11 @@ export class PrismaUsersRepository implements IUsersRepository {
             include: {
                 team: {
                     include: {
-                        pokemons: true
+                        pokemons: {
+                            include: {
+                                pokemon: true
+                            }
+                        }
                     }
                 }
             }

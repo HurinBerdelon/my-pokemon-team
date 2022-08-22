@@ -6,7 +6,7 @@ export class GetUserByIdController {
 
     async handle(request: Request, response: Response): Promise<Response> {
 
-        const { userId } = request.body
+        const { id: userId } = request.params
 
         const getUserByIdUseCase = container.resolve(GetUserByIdUseCase)
 

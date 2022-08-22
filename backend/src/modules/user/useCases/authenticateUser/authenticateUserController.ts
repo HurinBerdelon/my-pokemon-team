@@ -8,8 +8,6 @@ export class AuthenticateUserController {
 
         const { providerId, name, imageUrl } = request.body
 
-        console.log('imageUrl', imageUrl)
-
         const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase)
 
         const result = await authenticateUserUseCase.execute(providerId, name, imageUrl)
