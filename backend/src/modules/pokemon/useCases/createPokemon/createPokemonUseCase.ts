@@ -9,12 +9,12 @@ export class CreatePokemonUseCase {
         private pokemonsRepository: IPokemonRepository
     ) { }
 
-    async execute(pokeId: string): Promise<Pokemon> {
+    async execute(pokeId: string, name: string, imageUrl: string, types: string[]): Promise<Pokemon> {
 
         let pokemon = await this.pokemonsRepository.findByPokeId(pokeId)
 
         if (!pokemon) {
-            pokemon = await this.pokemonsRepository.create(pokeId)
+            pokemon = await this.pokemonsRepository.create(pokeId, name, imageUrl, types)
         }
 
         return pokemon

@@ -15,7 +15,7 @@ describe('Create Pokemon UseCase', () => {
     it('should be able to create a pokemon', async () => {
         const pokeId = 'some-valid-id'
 
-        const result = await createPokemonUseCase.execute(pokeId)
+        const result = await createPokemonUseCase.execute(pokeId, 'pokemonName', 'imageUrl.test', ['type1'])
 
         expect(result).toHaveProperty('id')
         expect(result).toHaveProperty('pokeID')
@@ -25,8 +25,8 @@ describe('Create Pokemon UseCase', () => {
     it('should not be able to create a pokemon if it already exists', async () => {
         const pokeId = 'some-valid-id'
 
-        await createPokemonUseCase.execute(pokeId)
-        await createPokemonUseCase.execute(pokeId)
+        await createPokemonUseCase.execute(pokeId, 'pokemonName', 'imageUrl.test', ['type1'])
+        await createPokemonUseCase.execute(pokeId, 'pokemonName', 'imageUrl.test', ['type1'])
 
         expect(inMemoryPokemonRepository.pokemonsRepository.length).toEqual(1)
     })
