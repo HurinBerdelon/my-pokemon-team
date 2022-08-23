@@ -12,4 +12,4 @@ const getAllTeamsController = new GetAllTeamsController()
 
 teamsRoutes.get('/', getAllTeamsController.handle)
 teamsRoutes.post('/add', ensureAuthenticated, addPokemonToTeamController.handle)
-teamsRoutes.delete('/remove', ensureAuthenticated, removePokemonFromTeamController.handle)
+teamsRoutes.patch('/remove', ensureAuthenticated, removePokemonFromTeamController.handle)

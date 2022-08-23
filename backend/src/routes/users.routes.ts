@@ -6,7 +6,7 @@ import { UpdateAvatarController } from "../modules/user/useCases/updateAvatar/up
 import { DeleteUserController } from "../modules/user/useCases/deleteUser/deleteUserController";
 import { ensureAuthenticated } from "../middleware/ensuseAuthenticated";
 import { tmpUploadFolder } from "../config/tmpUploadFolder";
-import { GetUserByIdController } from "../modules/user/useCases/getUserById/getUserController";
+import { GetUserByIdController } from "../modules/user/useCases/getUserById/getUserByIdController";
 
 const usersRoutes = Router()
 
@@ -19,7 +19,7 @@ const deleteUserController = new DeleteUserController()
 
 usersRoutes.get('/me', ensureAuthenticated, getUserController.handle)
 
-usersRoutes.get('/user-by-id', getUserByIdController.handle)
+usersRoutes.get('/:id', getUserByIdController.handle)
 
 usersRoutes.patch('/update-avatar',
     ensureAuthenticated,

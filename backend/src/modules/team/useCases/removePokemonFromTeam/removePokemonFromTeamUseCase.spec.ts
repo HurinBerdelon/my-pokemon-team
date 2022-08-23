@@ -37,7 +37,7 @@ describe('Remove Pokemon From Team UseCase', () => {
             pokemons: []
         })
 
-        await addPokemonToTeamUseCase.execute('pokeId', teamId)
+        await addPokemonToTeamUseCase.execute('pokeId', 'name', 'image', ['type'], teamId)
 
         const team = await removePokemonFromTeamUseCase.execute(teamId, 'pokeId')
 
@@ -56,8 +56,8 @@ describe('Remove Pokemon From Team UseCase', () => {
             pokemons: []
         })
 
-        await addPokemonToTeamUseCase.execute('pokeId', teamId)
-        await addPokemonToTeamUseCase.execute('pokeId-2', teamId)
+        await addPokemonToTeamUseCase.execute('pokeId', 'name', 'image', ['type'], teamId)
+        await addPokemonToTeamUseCase.execute('pokeId-2', 'name', 'image', ['type'], teamId)
 
         const team = await removePokemonFromTeamUseCase.execute(teamId, 'pokeId')
 
@@ -92,7 +92,7 @@ describe('Remove Pokemon From Team UseCase', () => {
             pokemons: []
         })
 
-        inMemoryPokemonsRepository.create('pokeId')
+        inMemoryPokemonsRepository.create('pokeId', 'name', 'image', ['type'])
 
         await expect(
             removePokemonFromTeamUseCase.execute(teamId, 'pokeId')
