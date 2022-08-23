@@ -46,8 +46,11 @@ model Team {
 }
 
 model Pokemon {
-  id     String @id() @default(uuid())
-  pokeID String @unique()
+  id       String   @id() @default(uuid())
+  pokeID   String   @unique()
+  name     String
+  imageUrl String
+  types    String[]
 
   teams PokemonOnTeams[]
 

@@ -44,6 +44,47 @@
 				}
 			}
 		},
+		"/users/{id}": {
+			"get": {
+				"tags": [
+					"User"
+				],
+				"summary": "Get information about authenticated User",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/User"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "User Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
 		"/users/update-avatar": {
 			"patch": {
 				"tags": [
@@ -283,6 +324,18 @@
 									"pokeId": {
 										"type": "string"
 									},
+									"name": {
+										"type": "string"
+									},
+									"imageUrl": {
+										"type": "string"
+									},
+									"types": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									},
 									"teamId": {
 										"type": "string"
 									}
@@ -316,7 +369,7 @@
 			}
 		},
 		"/team/remove": {
-			"delete": {
+			"patch": {
 				"tags": [
 					"Teams"
 				],
@@ -489,7 +542,7 @@
 				"pokeID": {
 					"type": "string"
 				},
-				"teams": {
+				"types": {
 					"type": "array",
 					"items": {
 						"$ref": "#definitions/PokemonOnTeams"

@@ -18,6 +18,8 @@ export async function ensureAuthenticated(request: Request, response: Response, 
 
     const [, accessToken] = authHeader.split(' ')
 
+    // console.log(accessToken)
+
     try {
         const { sub: user_id } = verify(accessToken, envConfig.JWT_SECRET) as IPayload
 
