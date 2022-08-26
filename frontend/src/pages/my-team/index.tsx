@@ -12,6 +12,7 @@ import { PokemonSchema } from "../../schema/PokemonSchema";
 import { ScrollToTop } from "../../components/ScrollToTop";
 import { useUser } from "../../hooks/useUser";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 interface MyTeamProps {
     data: {
@@ -27,10 +28,11 @@ export default function MyTeamPage({ data }: MyTeamProps): JSX.Element {
     const { user } = useUser()
     const router = useRouter()
 
-    if (!user) {
-        router.push('/')
-        return <></>
-    }
+    useEffect(() => {
+        if (!user) {
+            // router.push('/')
+        }
+    }, [])
 
     return (
         <>
@@ -41,10 +43,10 @@ export default function MyTeamPage({ data }: MyTeamProps): JSX.Element {
             <ThemeProvider theme={currentTheme}>
                 <Header />
                 <MyTeamPageContainer>
-                    <MyTeam user={user} />
+                    <MyTeam />
                     <div className="pokemons">
                         {/* <FilterInput /> */}
-                        <Pokemons data={data} />
+                        <Pokemons data={data} showAddButton={true} />
                     </div>
                     <ScrollToTop />
                 </MyTeamPageContainer>
@@ -57,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
     const data = await getPaginatedPokemon(1, 20)
 
-    // Redirect to home if not authenticated on serverside
+    //TODO: Redirect to home if not authenticated on serverside
 
     return {
         props: {
