@@ -7,12 +7,15 @@ export function Profile(): JSX.Element {
 
     const { user } = useUser()
 
+    // TODO: Check if referrerPolicy is needed when deployeds
 
     return (
         <ProfileContainer>
             <div className="imgContainer">
-                {user?.imageURL
-                    ? <img src={user.imageURL} alt="profile" />
+                {user
+                    ? user.avatarURL
+                        ? <img referrerPolicy="no-referrer" src={user.avatarURL} alt="profile" />
+                        : <img src="/avatar/user.png" alt="profile" />
                     : <img src="/avatar/user.png" alt="profile" />
                 }
             </div>

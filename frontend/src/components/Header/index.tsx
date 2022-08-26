@@ -13,7 +13,7 @@ export function Header(): JSX.Element {
     const { user, revokeAuthentication } = useUser()
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
-    // TODO: Show user image instead of Gojou
+    // TODO: Check if referrerPolicy is needed when deployed
 
     return (
         <HeaderContainer>
@@ -29,8 +29,9 @@ export function Header(): JSX.Element {
                     <Popover.Button className="profileButton">
                         <div className="miniImgContainer">
                             {user
-                                // ? <img src={user.imageURL} alt="profile" />
-                                ? <img src="/avatar/Gojou.jpg" alt="profile" />
+                                ? user.avatarURL
+                                    ? <img referrerPolicy="no-referrer" src={user.avatarURL} alt="profile" />
+                                    : <img src="/avatar/user.png" alt="profile" />
                                 : <img src="/avatar/user.png" alt="profile" />
                             }
                         </div>
