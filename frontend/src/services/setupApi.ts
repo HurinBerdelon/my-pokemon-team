@@ -29,18 +29,15 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
         error => {
             if (error.response.status === 401) {
                 if (error.response.data?.message === 'Invalid Token!') {
-                    console.log('invalid token')
 
                     const originalConfig = error.config
 
                     if (!isRefreshing) {
 
-                        console.log('is refreshing')
                         cookies = parseCookies(ctx)
                         const refreshToken = cookies[appKeys.refreshTokenKey]
 
                         isRefreshing = true
-                        console.log(refreshToken)
 
                         api.post('/refresh', {}, {
                             headers: {
@@ -58,14 +55,11 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
                                 path: '/'
                             })
 
-                            api.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`
-
-                            console.log('Queue:', failedRequestQueue)
+                            api.defaults.headers['Authorization'] = `Bearer ${response.data.accessToken}`
 
                             failedRequestQueue.forEach(request => request.onSucess(response.data.accessToken))
                             failedRequestQueue = []
                         }).catch(error => {
-                            console.log('Refresh Failed')
                             failedRequestQueue.forEach(request => request.onFailure(error))
                             failedRequestQueue = []
                         }).finally(() => {
