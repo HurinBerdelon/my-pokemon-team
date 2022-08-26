@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 import { destroyCookie, parseCookies, setCookie } from "nookies"
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { appKeys } from "../config/AppKeys"
-import { UserSchema } from "../schema/UserSchema"
+import { UserResponseProps, UserSchema } from "../schema/UserSchema"
 import { api } from "../services/api"
 
 interface UserProviderProps {
@@ -12,7 +12,7 @@ interface UserProviderProps {
 }
 
 interface UserContextData {
-    user: UserSchema | undefined
+    user: UserResponseProps | undefined
     isAuthenticated: boolean
     authenticate: (session: Session) => void
     revokeAuthentication: () => void
@@ -22,7 +22,7 @@ const userContext = createContext<UserContextData>({} as UserContextData)
 
 export function UserProvider({ children }: UserProviderProps): JSX.Element {
 
-    const [user, setUser] = useState<UserSchema | undefined>()
+    const [user, setUser] = useState<UserResponseProps | undefined>()
     const router = useRouter()
     const isAuthenticated = !!user
 
@@ -53,7 +53,11 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
                 path: '/'
             })
 
+            api.defaults.headers['Authorization'] = `Bearer ${response.data.accessToken}`
+
             setUser(response.data.user)
+
+            router.push('/my-team')
         }).catch(error => {
             console.log(error)
             router.push('/')
@@ -64,8 +68,7 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
         const cookies = parseCookies()
         api.delete('logout', {
             headers: {
-                'x-refresh-token': cookies[appKeys.refreshTokenKey],
-                Authorization: `Bearer ${cookies[appKeys.accessTokenKey]}`
+                'x-refresh-token': cookies[appKeys.refreshTokenKey]
             }
         }).then(() => {
             setUser(undefined)
