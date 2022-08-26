@@ -11,9 +11,10 @@ interface PokemonsProps {
         next: string | null
         pokemons: PokemonSchema[]
     }
+    showAddButton?: boolean
 }
 
-export function Pokemons({ data }: PokemonsProps): JSX.Element {
+export function Pokemons({ data, showAddButton = false }: PokemonsProps): JSX.Element {
 
     const [page, setPage] = useState(1)
     const [pokemons, setPokemons] = useState(data.pokemons)
@@ -43,7 +44,7 @@ export function Pokemons({ data }: PokemonsProps): JSX.Element {
                     <div key={pokemon.id} className="pokemonContainer">
                         <PokemonCard
                             pokemon={pokemon}
-                            showAddButton={true}
+                            showAddButton={showAddButton}
                             showNumber={true}
                             showTypes={true}
                         />

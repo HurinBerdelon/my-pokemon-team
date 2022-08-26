@@ -1,30 +1,26 @@
 import { MyTeamContainer } from "./style";
 import { XCircle } from "phosphor-react";
-import { UserSchema } from "../../schema/UserSchema";
+import { useTeam } from "../../hooks/useTeam";
+import { PokemonSchema } from "../../schema/PokemonSchema";
 
-interface MyTeamProps {
-    user: UserSchema
-}
+export function MyTeam(): JSX.Element {
 
-export function MyTeam({ user }: MyTeamProps): JSX.Element {
-
-    async function handleRemovePokemon(id: string): Promise<void> {
-        console.log(id)
-    }
+    const { removePokemonFromTeam } = useTeam()
+    const { myTeam } = useTeam()
 
     return (
         <MyTeamContainer>
-            <h2>My Team</h2>
+            <h2>My Team <span>{`${myTeam?.pokemons.length}/6`}</span></h2>
 
             <div className="teamContent">
 
-                {user.team.pokemons.map(pokemon => (
+                {myTeam?.pokemons.map((pokemon: PokemonSchema) => (
                     <div className="pokemonContainer" key={pokemon.id}>
                         <XCircle
                             className="closeButton"
                             tabIndex={0}
                             weight='fill'
-                            onClick={() => handleRemovePokemon(pokemon.id)}
+                            onClick={() => removePokemonFromTeam(pokemon)}
                         />
 
                         <img src={pokemon.imageUrl} alt={pokemon.name} />

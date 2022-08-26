@@ -1,12 +1,8 @@
-import { PokemonSchema } from "../../schema/PokemonSchema";
+import { TeamSchema } from "../../schema/PokemonSchema";
 import { TeamContainer } from "./style";
 
 interface TeamProps {
-    team: {
-        id: string
-        userName: string
-        pokemons: PokemonSchema[]
-    }
+    team: TeamSchema
 }
 
 export function Team({ team }: TeamProps): JSX.Element {

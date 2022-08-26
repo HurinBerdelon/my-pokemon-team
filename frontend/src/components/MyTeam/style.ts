@@ -31,7 +31,9 @@ export const MyTeamContainer = styled.section`
     }
     
     h2 {
-        text-align: center;
+        margin-top: 0.25rem;
+        display: flex;
+        justify-content:space-evenly;
         color: ${props => props.theme.colors.textTwo};
         font-size: 1.25rem;
     }

@@ -24,14 +24,14 @@ export const PopoverMenuContainer = styled.div`
 
         padding: 1rem 1.5rem;
         
-        .logout {
+        .logout, .login {
             margin-top: 1rem;
             border-top: 1px solid ${props => props.theme.colors.inputPlaceholder};
 
             display: flex;
             justify-content: center;
             
-            .logoutButton {
+            .logoutButton, .loginButton {
                 margin-top: 1rem;
                 padding: 0.25rem 0.75rem;
                 border-radius: 1rem;

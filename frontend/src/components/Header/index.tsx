@@ -13,6 +13,8 @@ export function Header(): JSX.Element {
     const { user, revokeAuthentication } = useUser()
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
+    // TODO: Show user image instead of Gojou
+
     return (
         <HeaderContainer>
             <h2>My Pokemon Team</h2>
@@ -36,7 +38,7 @@ export function Header(): JSX.Element {
                     <Popover.Panel className='popoverMenuContent'>
                         <Profile />
                         {!user && (
-                            <div className="logout">
+                            <div className="login">
                                 <button
                                     onClick={() => setIsLoginModalOpen(true)}
                                     className="loginButton"

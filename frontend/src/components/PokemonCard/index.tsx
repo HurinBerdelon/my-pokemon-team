@@ -2,6 +2,7 @@ import { PokemonCardContainer } from "./style";
 import { PlusCircle, XCircle } from "phosphor-react";
 import light from "../../styles/themes/light";
 import { PokemonSchema } from "../../schema/PokemonSchema";
+import { useTeam } from "../../hooks/useTeam";
 
 interface PokemonCardProps {
     pokemon: PokemonSchema
@@ -20,9 +21,7 @@ export function PokemonCard({
 
 }: PokemonCardProps): JSX.Element {
 
-    async function handleAddPokemon(id: string): Promise<void> {
-        console.log(Number(id))
-    }
+    const { addPokemonToTeam } = useTeam()
 
     return (
         <PokemonCardContainer>
@@ -47,7 +46,7 @@ export function PokemonCard({
                     weight='fill'
                     className='addButton'
                     tabIndex={0}
-                    onClick={() => handleAddPokemon(pokemon.id)}
+                    onClick={() => addPokemonToTeam(pokemon)}
                 />}
             {showRemoveButton && <XCircle className="closeButton" tabIndex={0} weight='fill' />}
             {/* <button className='addButtonBottom'>
