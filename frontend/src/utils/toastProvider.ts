@@ -1,9 +1,13 @@
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 
+function capitalize(phrase: string) {
+    return phrase.charAt(0).toUpperCase() + phrase.slice(1)
+}
+
 export function toastSuccess(message: string) {
-    toast.success(message, {
-        position: 'bottom-right',
+    toast.success(capitalize(message), {
+        position: 'bottom-left',
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -13,8 +17,8 @@ export function toastSuccess(message: string) {
 }
 
 export function toastWarn(message: string) {
-    toast.warn(message, {
-        position: 'bottom-right',
+    toast.warn(capitalize(message), {
+        position: 'bottom-left',
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -24,8 +28,8 @@ export function toastWarn(message: string) {
 }
 
 export function toastError(message: string) {
-    toast.error(message, {
-        position: 'bottom-right',
+    toast.error(capitalize(message), {
+        position: 'bottom-left',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
