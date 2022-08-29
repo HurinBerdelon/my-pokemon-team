@@ -3,6 +3,7 @@ import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { Header } from "../components/Header";
 import { Pokemons } from "../components/Pokemons";
+import { PresentationHeader } from "../components/PresentationHeader";
 import { ScrollToTop } from "../components/ScrollToTop";
 import { useCurrentTheme } from "../hooks/useCurrentTheme";
 import { PokemonSchema } from "../schema/PokemonSchema";
@@ -28,6 +29,7 @@ export default function Home({ data }: HomeProps) {
 
 			<ThemeProvider theme={currentTheme}>
 				<Header />
+				<PresentationHeader />
 				{/* <FilterInput /> */}
 				<Pokemons data={data} />
 				<ScrollToTop />
