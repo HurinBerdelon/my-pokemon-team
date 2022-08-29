@@ -11,15 +11,18 @@ export function Menu(): JSX.Element {
             <Link href='/'>
                 <a>Home</a>
             </Link>
-            <Link href='/teams'>
-                <a>Teams</a>
-            </Link>
 
             {user && (
                 <Link href='/my-team'>
                     <a>My Team</a>
                 </Link>
             )}
+            <Link href='/teams'>
+                <a>Teams</a>
+            </Link>
+            <Link href='/about'>
+                <a>About</a>
+            </Link>
         </MenuContainer>
     )
 }

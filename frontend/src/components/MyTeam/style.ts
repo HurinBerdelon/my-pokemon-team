@@ -31,11 +31,23 @@ export const MyTeamContainer = styled.section`
     }
     
     h2 {
-        margin-top: 0.25rem;
+        margin-top: 0.45rem;
         display: flex;
         justify-content: space-evenly;
         color: ${props => props.theme.colors.textTwo};
         font-size: 1.25rem;
+
+        button {
+            background: ${props => props.theme.colors.buttons};
+            color: ${props => props.theme.colors.textThree};
+            font-weight: 600;
+            padding: 0.25rem 1rem;
+            border-radius: 0.25rem;
+
+            &:hover {
+                filter: brightness(1.2)
+            }
+        }
     }
 
     p {

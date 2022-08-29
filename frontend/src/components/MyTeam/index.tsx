@@ -2,6 +2,7 @@ import { MyTeamContainer } from "./style";
 import { PlusCircle, XCircle } from "phosphor-react";
 import { useTeam } from "../../hooks/useTeam";
 import { PokemonSchema } from "../../schema/PokemonSchema";
+import { toastSuccess } from "../../utils/toastProvider";
 
 export function MyTeam(): JSX.Element {
 
@@ -10,7 +11,11 @@ export function MyTeam(): JSX.Element {
 
     return (
         <MyTeamContainer>
-            <h2>My Team <span>{`${myTeam?.pokemons.length}/6`}</span></h2>
+            <h2>
+                My Team
+                <span>{`${myTeam?.pokemons.length}/6`}</span>
+                <button onClick={() => toastSuccess('Team saved!')}>Save</button>
+            </h2>
 
             {myTeam?.pokemons.length === 0 &&
                 (
