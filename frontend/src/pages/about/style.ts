@@ -10,6 +10,10 @@ export const AboutContainer = styled.div`
         flex: 1;
         padding: 4rem;
 
+        h2 {
+            color: ${props => props.theme.colors.textOne}
+        }
+
         @media (min-width: 720px) {
             max-width: 800px;
             margin: 0 auto;
@@ -18,6 +22,10 @@ export const AboutContainer = styled.div`
         .presentation, .history, .invite {
 
             padding-bottom: 1rem;
+
+            h4, p {
+                color: ${props => props.theme.colors.textOne}
+            }
 
             h4 {
                 padding: 1rem 0;
