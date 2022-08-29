@@ -33,9 +33,28 @@ export const MyTeamContainer = styled.section`
     h2 {
         margin-top: 0.25rem;
         display: flex;
-        justify-content:space-evenly;
+        justify-content: space-evenly;
         color: ${props => props.theme.colors.textTwo};
         font-size: 1.25rem;
+    }
+
+    p {
+        padding: 0.5rem 1rem;
+        text-align: justify;
+        color: ${props => props.theme.colors.textTwo};
+
+        .closeButtonIcon, .addButtonIcon {
+            margin: 0 0.25rem;
+            font-size: 1.25rem;
+        }
+
+        .addButtonIcon {
+            color: ${props => props.theme.colors.green}
+        }
+
+        .closeButtonIcon {
+            color: ${props => props.theme.colors.danger};
+        }
     }
 
     .teamContent {

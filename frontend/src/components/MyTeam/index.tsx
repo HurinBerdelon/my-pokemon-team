@@ -1,5 +1,5 @@
 import { MyTeamContainer } from "./style";
-import { XCircle } from "phosphor-react";
+import { PlusCircle, XCircle } from "phosphor-react";
 import { useTeam } from "../../hooks/useTeam";
 import { PokemonSchema } from "../../schema/PokemonSchema";
 
@@ -11,6 +11,24 @@ export function MyTeam(): JSX.Element {
     return (
         <MyTeamContainer>
             <h2>My Team <span>{`${myTeam?.pokemons.length}/6`}</span></h2>
+
+            {myTeam?.pokemons.length === 0 &&
+                (
+                    <p>
+                        Here is your team, with your favorite pokemons. Click in the
+                        <PlusCircle
+                            className="addButtonIcon"
+                            weight='fill'
+                        />
+                        button on the list of pokemons to recruite them to your team. Click in the
+                        <XCircle
+                            className="closeButtonIcon"
+                            weight='fill'
+                        />
+                        button after adding to your team,
+                        to remove them.
+                    </p>
+                )}
 
             <div className="teamContent">
 
