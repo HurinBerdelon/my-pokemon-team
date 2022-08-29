@@ -27,20 +27,14 @@ export const PokemonsContainer = styled.main`
         
         @media (min-width: 720px) {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             flex-wrap: wrap;
         }
+
+        @media (min-width: 1560px) {
+            .pokemonContainer {
+                width: 250px;
+            }
+        }
     }    
-
-    .loadMoreButton{
-        align-self: center;
-        padding: 0.5rem 1rem;
-
-        background: ${props => props.theme.colors.buttons};
-        color: ${props => props.theme.colors.textThree};        
-        border-radius: 0.5rem;
-
-        font-weight: 600;
-        font-size: 1rem;
-    }
 `

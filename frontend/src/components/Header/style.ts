@@ -58,6 +58,17 @@ export const HeaderContainer = styled.header`
                     color: ${props => props.theme.colors.textThree};
                 }
             }
+
+            @media (min-width: 1440px) {
+                padding: 2rem;
+
+                .login, .logout {
+
+                    .logoutButton, .loginButton {
+                        font-size: 1rem;
+                    }
+                }
+            }
         }
 
         @media (max-width: 720px) {

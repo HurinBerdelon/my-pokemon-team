@@ -44,18 +44,6 @@ export const PokemonCardContainer = styled.div`
         color: ${props => props.theme.colors.danger};
     }
 
-    /* .addButtonBottom {
-        width: 100%;
-        margin-top: 0.5rem;
-        padding: 0.1rem 0.25rem;
-
-        background: ${props => props.theme.colors.green};
-        color: ${props => props.theme.colors.textTwo};
-        border-radius: 2rem;
-
-        font-weight: 600;
-    } */
-
     .imgContainer {
         width: 100px;
         height: 100px;
@@ -63,6 +51,11 @@ export const PokemonCardContainer = styled.div`
         @media (min-width: 1080px) {
             width: 150px;
             height: 150px;
+        }
+
+        @media (min-width: 1560px) {
+            width: 162px;
+            height: 162px;
         }
 
         img {
