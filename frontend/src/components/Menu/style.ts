@@ -6,8 +6,15 @@ export const MenuContainer = styled.nav`
     flex-direction: column;
     gap: 0.25rem;
 
+    position: relative;
+
     a {
         font-size: 1.25rem;
+
+        &.active {
+            text-decoration: underline;
+            text-underline-offset: 10px;
+        }
     }
 
     @media (min-width: 720px) {

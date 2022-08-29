@@ -26,6 +26,10 @@ export const DropImageContainer = styled.div`
 
             font-size: 2rem;
             color: ${props => props.theme.colors.danger};
+
+            &:hover {
+                filter: brightness(1.2);
+            }
         }
     }
 
@@ -44,7 +48,6 @@ export const DropImageContainer = styled.div`
 
         &:focus {
             p {
-                
                 color: ${props => props.theme.colors.danger};
             }
         }
@@ -70,6 +73,10 @@ export const DropImageContainer = styled.div`
 
             font-size: 2rem;
             color: ${props => props.theme.colors.danger};
+
+            &:hover {
+                filter: brightness(1.2);
+            }
         }
         
         .errorMessage {

@@ -15,6 +15,10 @@ export const DeleteAccountContainer = styled.div`
     .deleteButton {
         color: ${props => props.theme.colors.danger};
         font-size: 1.25rem;
+
+        &:hover {
+            filter: brightness(1.2);
+        }
     }
 
     .confirmDeletion {

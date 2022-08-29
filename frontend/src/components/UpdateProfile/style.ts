@@ -46,6 +46,10 @@ export const UpdateProfileContainer = styled.section`
                 
             background: ${props => props.theme.colors.buttons};
             color: ${props => props.theme.colors.textThree};
+
+            &:hover {
+                filter: brightness(1.2)
+            }
         }
 
     }

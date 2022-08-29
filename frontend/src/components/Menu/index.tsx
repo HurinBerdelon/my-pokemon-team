@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useUser } from "../../hooks/useUser";
+import { ActiveLink } from "./ActiveLink";
 import { MenuContainer } from "./style";
 
 export function Menu(): JSX.Element {
@@ -8,21 +9,21 @@ export function Menu(): JSX.Element {
 
     return (
         <MenuContainer>
-            <Link href='/'>
+            <ActiveLink href='/' activeClassName="active">
                 <a>Home</a>
-            </Link>
+            </ActiveLink>
 
             {user && (
-                <Link href='/my-team'>
+                <ActiveLink href='/my-team' activeClassName="active">
                     <a>My Team</a>
-                </Link>
+                </ActiveLink>
             )}
-            <Link href='/teams'>
+            <ActiveLink href='/teams' activeClassName="active">
                 <a>Teams</a>
-            </Link>
-            <Link href='/about'>
+            </ActiveLink>
+            <ActiveLink href='/about' activeClassName="active">
                 <a>About</a>
-            </Link>
+            </ActiveLink>
         </MenuContainer>
     )
 }
