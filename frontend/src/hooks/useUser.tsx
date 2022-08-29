@@ -1,3 +1,4 @@
+import { FormikValues } from "formik"
 import { Session } from "next-auth"
 import { signOut } from "next-auth/react"
 import { useRouter } from "next/router"
@@ -6,6 +7,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { appKeys } from "../config/AppKeys"
 import { UserResponseProps, UserSchema } from "../schema/UserSchema"
 import { api } from "../services/api"
+import { toastError, toastSuccess } from "../utils/toastProvider"
 
 interface UserProviderProps {
     children: ReactNode
@@ -16,6 +18,7 @@ interface UserContextData {
     isAuthenticated: boolean
     authenticate: (session: Session) => void
     revokeAuthentication: () => void
+    updateUserImage: (values: FormikValues) => void
 }
 
 const userContext = createContext<UserContextData>({} as UserContextData)
@@ -78,12 +81,32 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
             .finally(() => router.push('/'))
     }
 
+    async function updateUserImage(values: FormikValues) {
+        try {
+
+            await api.patch('users/update-avatar', { avatar: values.avatar },
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                })
+
+            const response = await api.get('/users/me')
+            setUser(response.data)
+            toastSuccess('Avatar Picture Updated!')
+        } catch (error) {
+            console.log(error)
+            toastError('It was not possible to update your avatar, please try another image!')
+        }
+    }
+
     return (
         <userContext.Provider value={{
             user,
             isAuthenticated,
             authenticate,
-            revokeAuthentication
+            revokeAuthentication,
+            updateUserImage
         }}
         >
             {children}
