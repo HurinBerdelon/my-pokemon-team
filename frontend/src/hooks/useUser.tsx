@@ -4,6 +4,7 @@ import { signOut } from "next-auth/react"
 import { useRouter } from "next/router"
 import { destroyCookie, parseCookies, setCookie } from "nookies"
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
+import { toast } from "react-toastify"
 import { appKeys } from "../config/AppKeys"
 import { UserResponseProps, UserSchema } from "../schema/UserSchema"
 import { api } from "../services/api"
@@ -19,6 +20,7 @@ interface UserContextData {
     authenticate: (session: Session) => void
     revokeAuthentication: () => void
     updateUserImage: (values: FormikValues) => void
+    deleteUserAccount: () => void
 }
 
 const userContext = createContext<UserContextData>({} as UserContextData)
@@ -100,13 +102,25 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
         }
     }
 
+    async function deleteUserAccount() {
+        try {
+            await api.delete('users/delete')
+            toastSuccess('Account Deleted!')
+            router.push('/')
+        } catch (error) {
+            console.log(error)
+            toastError('It was not possible to delete your account, please try again later!')
+        }
+    }
+
     return (
         <userContext.Provider value={{
             user,
             isAuthenticated,
             authenticate,
             revokeAuthentication,
-            updateUserImage
+            updateUserImage,
+            deleteUserAccount
         }}
         >
             {children}
