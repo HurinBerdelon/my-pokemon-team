@@ -6,8 +6,8 @@ export const DropImageContainer = styled.div`
     margin-bottom: .5rem;
 
     .previewZone {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
         position: relative;
         
         .preview {
@@ -21,6 +21,8 @@ export const DropImageContainer = styled.div`
             position: absolute;
             bottom: 0;
             right: 0;
+
+            cursor: pointer;
 
             font-size: 2rem;
             color: ${props => props.theme.colors.danger};
@@ -63,6 +65,8 @@ export const DropImageContainer = styled.div`
             position: absolute;
             bottom: 0;
             right: 0;
+
+            cursor: pointer;
 
             font-size: 2rem;
             color: ${props => props.theme.colors.danger};

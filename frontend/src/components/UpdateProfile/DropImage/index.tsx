@@ -1,9 +1,10 @@
-import { createRef, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import Dropzone, { DropzoneRef } from "react-dropzone";
 import { ArrowCounterClockwise, TrashSimple } from "phosphor-react";
 import { availableImageTypes } from "../../../config/availableImageType";
 import { DropImageContainer } from "./style";
 import { FormikErrors } from "formik";
+import { useUser } from "../../../hooks/useUser";
 
 interface DropImageProps {
     errors: FormikErrors<{
@@ -15,7 +16,13 @@ interface DropImageProps {
 export function DropImage({ errors, setFieldValue }: DropImageProps): JSX.Element {
 
     const [preview, setPreview] = useState('')
-    const dropzonRef = createRef<DropzoneRef>()
+    const dropzoneRef = createRef<DropzoneRef>()
+    const { user } = useUser()
+
+    useEffect(() => {
+        setPreview(user?.avatarURL as string)
+    }, [user])
+
 
     return (
         <DropImageContainer>
@@ -31,18 +38,19 @@ export function DropImage({ errors, setFieldValue }: DropImageProps): JSX.Elemen
                         }
                     }
                 }}
-                ref={dropzonRef}
+                ref={dropzoneRef}
             >
                 {({ getRootProps, getInputProps, isDragActive }) => (
                     preview
                         ? <div className='previewZone'>
-                            <img className='preview' alt="Profile Preview" src='/avatar/Gojou.jpg' />
+                            <img className='preview' alt="Profile Preview" src={preview} />
                             <TrashSimple
                                 weight="fill"
                                 className="removeButton"
                                 tabIndex={0}
                                 onClick={() => {
-                                    //setAvatarNull
+                                    setPreview('')
+                                    setFieldValue('avatar', null)
                                 }}
 
                             />
@@ -61,7 +69,7 @@ export function DropImage({ errors, setFieldValue }: DropImageProps): JSX.Elemen
                                 tabIndex={0}
                                 onClick={(event) => {
                                     event.stopPropagation()
-                                    setPreview('')
+                                    setPreview(user?.avatarURL as string)
                                 }}
                             />
                             {isDragActive ?

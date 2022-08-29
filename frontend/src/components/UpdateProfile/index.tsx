@@ -4,11 +4,16 @@ import * as yup from 'yup'
 import { availableImageTypes } from "../../config/availableImageType";
 import { DropImage } from "./DropImage";
 import { DeleteAccount } from "./DeleteAccount";
+import { useUser } from "../../hooks/useUser";
 
 export function UpdateProfile(): JSX.Element {
 
-    async function handleSubmit(values: FormikValues): Promise<void> {
+    const { user, updateUserImage } = useUser()
 
+    async function handleSubmit(values: FormikValues): Promise<void> {
+        console.log(values.avatar)
+
+        updateUserImage(values)
     }
 
     const initialValues = {
@@ -40,7 +45,7 @@ export function UpdateProfile(): JSX.Element {
                             errors={errors}
                         />
                         <div className="outsideDrop">
-                            <h2>Gojou Satoru</h2>
+                            <h2>{user?.name}</h2>
                             <button className="submitButton" type="submit">Save Avatar</button>
                         </div>
                     </Form>

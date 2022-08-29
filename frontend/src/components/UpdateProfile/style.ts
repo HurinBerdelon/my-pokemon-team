@@ -28,16 +28,24 @@ export const UpdateProfileContainer = styled.section`
             font-size: 2rem;
         }
 
+        .outsideDrop {
+            display: flex;
+            flex-direction: column;        
+        }
+
         .submitButton {
             margin-top: 1rem;
-                padding: 0.25rem 0.75rem;
-                border-radius: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            
+            width: fit-content;
+            align-self: center;
 
-                font-size: 1.5rem;
-                font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 600;
                 
-                background: ${props => props.theme.colors.buttons};
-                color: ${props => props.theme.colors.textThree};
+            background: ${props => props.theme.colors.buttons};
+            color: ${props => props.theme.colors.textThree};
         }
 
     }
