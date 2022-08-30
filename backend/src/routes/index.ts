@@ -7,9 +7,14 @@ import { teamsRoutes } from "./teams.routes";
 
 const router = Router()
 
-router.use(cors(), authenticateRoutes)
+const corsOptions = {
+    origin: process.env.CLIENT_URL,
+    optionSucessStatus: 200
+}
 
-router.use('/users', cors(), usersRoutes)
-router.use('/team', cors(), teamsRoutes)
+router.use(cors(corsOptions), authenticateRoutes)
+
+router.use('/users', cors(corsOptions), usersRoutes)
+router.use('/team', cors(corsOptions), teamsRoutes)
 
 export { router }
