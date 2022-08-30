@@ -13,6 +13,8 @@ import { ScrollToTop } from "../../components/ScrollToTop";
 import { useUser } from "../../hooks/useUser";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { parseCookies } from "nookies";
+import { appKeys } from "../../config/AppKeys";
 
 interface MyTeamProps {
     data: {
@@ -55,11 +57,20 @@ export default function MyTeamPage({ data }: MyTeamProps): JSX.Element {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     const data = await getPaginatedPokemon(1, 20)
 
-    //TODO: Redirect to home if not authenticated on serverside
+    const cookies = parseCookies(ctx)
+
+    if (!cookies[appKeys.accessTokenKey] || !cookies[appKeys.refreshTokenKey]) {
+        return {
+            redirect: {
+                destination: '/'
+            },
+            props: {},
+        }
+    }
 
     return {
         props: {

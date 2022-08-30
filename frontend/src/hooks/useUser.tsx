@@ -70,17 +70,10 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
     }
 
     function revokeAuthentication() {
-        const cookies = parseCookies()
-        api.delete('logout', {
-            headers: {
-                'x-refresh-token': cookies[appKeys.refreshTokenKey]
-            }
-        }).then(() => {
-            setUser(undefined)
-            destroyCookie(undefined, appKeys.refreshTokenKey, { path: '/' })
-            destroyCookie(undefined, appKeys.accessTokenKey, { path: '/' })
-        }).catch((error) => console.log(error))
-            .finally(() => router.push('/'))
+        setUser(undefined)
+        destroyCookie(undefined, appKeys.refreshTokenKey, { path: '/' })
+        destroyCookie(undefined, appKeys.accessTokenKey, { path: '/' })
+        router.push('/')
     }
 
     async function updateUserImage(values: FormikValues) {
@@ -106,7 +99,7 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
         try {
             await api.delete('users/delete')
             toastSuccess('Account Deleted!')
-            router.push('/')
+            revokeAuthentication()
         } catch (error) {
             console.log(error)
             toastError('It was not possible to delete your account, please try again later!')

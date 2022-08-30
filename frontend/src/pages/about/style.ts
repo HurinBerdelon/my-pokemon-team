@@ -44,6 +44,7 @@ export const AboutContainer = styled.div`
     footer {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 0.5rem 1rem;
 
         background: ${props => props.theme.colors.boxTwo};
