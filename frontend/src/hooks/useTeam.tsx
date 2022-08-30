@@ -77,9 +77,9 @@ export function TeamProvider({ children }: TeamProviderProps): JSX.Element {
             })
             toastSuccess(`${pokemon.name} was added to your team!`)
         } catch (error: any) {
-            if (error.response.data.message === "Cannot Add more pokemons to this team") {
+            if (error.response.data?.message === "Cannot Add more pokemons to this team") {
                 toastError("Cannot Add more pokemons to this team")
-            } else if (error.response.data.message === 'Pokemon already in this team') {
+            } else if (error.response.data?.message === 'Pokemon already in this team') {
                 toastWarn(`${pokemon.name} is already on your team`)
             } else {
                 console.log(error)
