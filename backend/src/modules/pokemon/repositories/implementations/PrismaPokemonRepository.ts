@@ -6,10 +6,13 @@ export class PrismaPokemonRepository implements IPokemonRepository {
 
     private pokemonsRepository = prisma.pokemon
 
-    async create(pokeId: string): Promise<Pokemon> {
+    async create(pokeId: string, name: string, imageUrl: string, types: string[]): Promise<Pokemon> {
         const pokemon = await this.pokemonsRepository.create({
             data: {
-                pokeID: pokeId
+                pokeID: pokeId,
+                name,
+                imageUrl,
+                types
             }
         })
 

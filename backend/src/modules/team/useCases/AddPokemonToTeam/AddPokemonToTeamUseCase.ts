@@ -15,11 +15,17 @@ export class AddPokemonToTeamUseCase {
         private pokemonsRepository: IPokemonRepository
     ) { }
 
-    async execute(pokeId: string, teamId: string): Promise<TeamResponse> {
+    async execute(
+        pokeId: string,
+        name: string,
+        imageUrl: string,
+        types: string[],
+        teamId: string
+    ): Promise<TeamResponse> {
 
         const createPokemonUseCase = new CreatePokemonUseCase(this.pokemonsRepository)
 
-        const pokemon = await createPokemonUseCase.execute(pokeId)
+        const pokemon = await createPokemonUseCase.execute(pokeId, name, imageUrl, types)
 
         const isPokemonOnTeam = await this.teamsRepository.checkForPokemonOnTeam(pokemon.id, teamId)
 

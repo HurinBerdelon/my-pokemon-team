@@ -6,11 +6,11 @@ export class AuthenticateUserController {
 
     async handle(request: Request, response: Response): Promise<Response> {
 
-        const { providerId, name } = request.body
+        const { providerId, name, imageUrl } = request.body
 
         const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase)
 
-        const result = await authenticateUserUseCase.execute(providerId, name)
+        const result = await authenticateUserUseCase.execute(providerId, name, imageUrl)
 
         return response.json(result)
     }

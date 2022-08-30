@@ -32,7 +32,7 @@ describe('AddPokemonToTeam UseCase', () => {
             pokemons: []
         })
 
-        const team = await addPokemonToTeamUseCase.execute('pokeId', teamId)
+        const team = await addPokemonToTeamUseCase.execute('pokeId', 'name', 'image', ['type'], teamId)
 
         expect(inMemoryTeamsRepository.teamsRepository.length).toEqual(1)
         expect(team.pokemons.length).toEqual(1)
@@ -49,10 +49,10 @@ describe('AddPokemonToTeam UseCase', () => {
             updatedAt: new Date()
         })
 
-        await addPokemonToTeamUseCase.execute('pokeId', teamId)
+        await addPokemonToTeamUseCase.execute('pokeId', 'name', 'image', ['type'], teamId)
 
         await expect(
-            addPokemonToTeamUseCase.execute('pokeId', teamId)
+            addPokemonToTeamUseCase.execute('pokeId', 'name', 'image', ['type'], teamId)
         ).rejects.toEqual(new AppError(ErrorMessages.pokemonAlreadyOnTeam))
     })
 
@@ -67,15 +67,15 @@ describe('AddPokemonToTeam UseCase', () => {
             updatedAt: new Date()
         })
 
-        await addPokemonToTeamUseCase.execute('pokeId-1', teamId)
-        await addPokemonToTeamUseCase.execute('pokeId-2', teamId)
-        await addPokemonToTeamUseCase.execute('pokeId-3', teamId)
-        await addPokemonToTeamUseCase.execute('pokeId-4', teamId)
-        await addPokemonToTeamUseCase.execute('pokeId-5', teamId)
-        await addPokemonToTeamUseCase.execute('pokeId-6', teamId)
+        await addPokemonToTeamUseCase.execute('pokeId-1', 'name', 'image', ['type'], teamId)
+        await addPokemonToTeamUseCase.execute('pokeId-2', 'name', 'image', ['type'], teamId)
+        await addPokemonToTeamUseCase.execute('pokeId-3', 'name', 'image', ['type'], teamId)
+        await addPokemonToTeamUseCase.execute('pokeId-4', 'name', 'image', ['type'], teamId)
+        await addPokemonToTeamUseCase.execute('pokeId-5', 'name', 'image', ['type'], teamId)
+        await addPokemonToTeamUseCase.execute('pokeId-6', 'name', 'image', ['type'], teamId)
 
         await expect(
-            addPokemonToTeamUseCase.execute('pokeId-X', teamId)
+            addPokemonToTeamUseCase.execute('pokeId-X', 'name', 'image', ['type'], teamId)
         ).rejects.toEqual(new AppError(ErrorMessages.teamComplete))
     })
 })

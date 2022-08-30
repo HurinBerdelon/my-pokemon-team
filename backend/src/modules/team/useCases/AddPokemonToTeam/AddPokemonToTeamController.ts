@@ -6,11 +6,23 @@ export class AddPokemonToTeamController {
 
     async handle(request: Request, response: Response): Promise<Response> {
 
-        const { pokeId, teamId } = request.body
+        const {
+            pokeId,
+            name,
+            imageUrl,
+            types,
+            teamId
+        } = request.body
 
         const addPokemonToTeamUseCase = container.resolve(AddPokemonToTeamUseCase)
 
-        const result = await addPokemonToTeamUseCase.execute(pokeId, teamId)
+        const result = await addPokemonToTeamUseCase.execute(
+            pokeId,
+            name,
+            imageUrl,
+            types,
+            teamId
+        )
 
         return response.json(result)
     }

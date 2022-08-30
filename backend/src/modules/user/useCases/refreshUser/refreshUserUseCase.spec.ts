@@ -109,6 +109,6 @@ describe('Create refresh Token', () => {
             refreshUserUseCase.execute({
                 refreshTokenValue: 'inexistent_refresh_token',
                 accessToken: accessToken
-            })).rejects.toEqual(new AppError(ErrorMessages.tokenNotFound, 404))
+            })).rejects.toEqual(new AppError(ErrorMessages.tokenNotFound, 401))
     })
 })

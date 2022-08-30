@@ -8,7 +8,7 @@ export class GetAllTeamsController {
 
         const getAllTeamsUseCase = container.resolve(GetAllTeamsUseCase)
 
-        const result = getAllTeamsUseCase.execute()
+        const result = await getAllTeamsUseCase.execute()
 
         return response.json(result)
     }

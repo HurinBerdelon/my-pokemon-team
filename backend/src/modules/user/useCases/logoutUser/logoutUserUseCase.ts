@@ -15,11 +15,8 @@ export class LogoutUserUseCase {
 
         const refreshToken = await this.tokensRepository.findByValue(refreshTokenValue)
 
-        if (!refreshToken) {
-            throw new AppError(ErrorMessages.tokenNotFound, 404)
+        if (refreshToken) {
+            await this.tokensRepository.delete(refreshTokenValue)
         }
-
-        await this.tokensRepository.delete(refreshTokenValue)
-
     }
 }

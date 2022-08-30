@@ -2,7 +2,7 @@ import { RefreshToken, User } from '@prisma/client';
 import { hash } from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid'
 import dayjs from 'dayjs';
-import { sign, verify } from 'jsonwebtoken';
+import { sign, verify, decode } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 import envConfig from '../../../../config/envConfig';
 import { AppError } from '../../../../errors/AppError';
@@ -27,7 +27,10 @@ export class RefreshUserUseCase {
 
     async execute({ accessToken, refreshTokenValue }): Promise<IResponse> {
 
-        const { sub: userId } = verify(accessToken, envConfig.JWT_SECRET) as { sub: string }
+        // console.log('refreshUseCase', accessToken)
+        // console.log(refreshTokenValue)
+
+        const { sub: userId } = decode(accessToken) as { sub: string }
 
         const user = await this.usersRepository.findById(userId)
 
@@ -38,7 +41,7 @@ export class RefreshUserUseCase {
         const oldRefreshToken = await this.tokensRepository.findByValue(refreshTokenValue)
 
         if (!oldRefreshToken) {
-            throw new AppError(ErrorMessages.tokenNotFound, 404)
+            throw new AppError(ErrorMessages.tokenNotFound, 401)
         }
 
         // if (oldRefreshToken.userId != user.id) {
@@ -48,6 +51,8 @@ export class RefreshUserUseCase {
         if (oldRefreshToken.expiresAt < dayjs().toDate()) {
             throw new AppError(ErrorMessages.tokenNotFound, 404)
         }
+
+        await this.tokensRepository.delete(oldRefreshToken.value)
 
         const refreshToken = await this.tokensRepository.create({
             value: await hash(uuidv4(), envConfig.hashRounds),

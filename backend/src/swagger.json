@@ -1,0 +1,577 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "My Pokemon Team API",
+		"description": "Documentation for My Pokemon Team API",
+		"version": "0.1.0",
+		"contact": {
+			"email": "fhpcardozo@gmail.com"
+		}
+	},
+	"paths": {
+		"/users/me": {
+			"get": {
+				"tags": [
+					"User"
+				],
+				"summary": "Get information about authenticated User",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/User"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "User Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/{id}": {
+			"get": {
+				"tags": [
+					"User"
+				],
+				"summary": "Get information about authenticated User",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/User"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "User Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/update-avatar": {
+			"patch": {
+				"tags": [
+					"User"
+				],
+				"summary": "Add or update an avatar for user account, should upload a file",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"avatar": {
+										"type": "string",
+										"format": "binary"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					},
+					"404": {
+						"description": "User Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/delete": {
+			"delete": {
+				"tags": [
+					"User"
+				],
+				"summary": "Delete user Account",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success"
+					},
+					"404": {
+						"description": "User Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/session": {
+			"post": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "Authenticate user if it already exists, create using 3rd part providerId if not",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"providerId": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"user": {
+											"$ref": "#definitions/User"
+										},
+										"accessToken": {
+											"type": "string"
+										},
+										"refreshToken": {
+											"$ref": "#definitions/RefreshToken"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/refresh": {
+			"post": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "Refresh user accessToken when it expires. Should receive the expired accessToken and a valid refreshToken to succeed",
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"schema": {
+							"type": "string"
+						},
+						"required": true
+					},
+					{
+						"in": "header",
+						"name": "x-refresh-token",
+						"schema": {
+							"type": "string"
+						},
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"user": {
+											"$ref": "#definitions/User"
+										},
+										"accessToken": {
+											"type": "string"
+										},
+										"refreshToken": {
+											"$ref": "#definitions/RefreshToken"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/logout": {
+			"delete": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "Logout user, removing its object from the request and deleting the current refreshToken from the database, so user cannot refresh the session with the token",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-refresh-token",
+						"schema": {
+							"type": "string"
+						},
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/team": {
+			"get": {
+				"tags": [
+					"Teams"
+				],
+				"summary": "Get All Teams registered in the database",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#definitions/Team"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/team/add": {
+			"post": {
+				"tags": [
+					"Teams"
+				],
+				"summary": "Add a pokemon to the team of the authenticated user",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"pokeId": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									},
+									"imageUrl": {
+										"type": "string"
+									},
+									"types": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									},
+									"teamId": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/Team"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request/ Team already completed or Pokemon already on team",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/team/remove": {
+			"patch": {
+				"tags": [
+					"Teams"
+				],
+				"summary": "Remove a pokemon from the team of current authenticated user",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"pokeId": {
+										"type": "string"
+									},
+									"teamId": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/Team"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request/ Pokemon is not on team",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/Error"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Pokemon Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#definitions/Error"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"User": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string"
+				},
+				"providerId": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"avatarURL": {
+					"type": "string"
+				},
+				"refreshToken": {
+					"type": "array",
+					"items": {
+						"$ref": "#definitions/RefreshToken"
+					}
+				},
+				"team": {
+					"$ref": "#definitions/Team"
+				},
+				"createdAt": {
+					"type": "string"
+				},
+				"updatedAt": {
+					"type": "string"
+				}
+			}
+		},
+		"RefreshToken": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string"
+				},
+				"expiresAt": {
+					"type": "string"
+				},
+				"user": {
+					"$ref": "#definitions/User"
+				},
+				"userId": {
+					"type": "string"
+				},
+				"createdAt": {
+					"type": "string"
+				}
+			}
+		},
+		"Team": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string"
+				},
+				"userId": {
+					"type": "string"
+				},
+				"pokemons": {
+					"type": "array",
+					"items": {
+						"$ref": "#definitions/PokemonOnTeams"
+					}
+				},
+				"createdAt": {
+					"type": "string"
+				},
+				"updatedAt": {
+					"type": "string"
+				}
+			}
+		},
+		"PokemonOnTeams": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string"
+				},
+				"team": {
+					"$ref": "#definitions/Team"
+				},
+				"teamId": {
+					"type": "string"
+				},
+				"pokemon": {
+					"$ref": "#definitions/Pokemon"
+				},
+				"pokemonId": {
+					"type": "string"
+				},
+				"createdAt": {
+					"type": "string"
+				},
+				"updatedAt": {
+					"type": "string"
+				}
+			}
+		},
+		"Pokemon": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string"
+				},
+				"pokeID": {
+					"type": "string"
+				},
+				"types": {
+					"type": "array",
+					"items": {
+						"$ref": "#definitions/PokemonOnTeams"
+					}
+				},
+				"createdAt": {
+					"type": "string"
+				},
+				"updatedAt": {
+					"type": "string"
+				}
+			}
+		},
+		"Error": {
+			"type": "object",
+			"properties": {
+				"message": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	}
+}

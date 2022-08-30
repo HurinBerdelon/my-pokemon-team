@@ -6,10 +6,13 @@ export class InMemoryPokemonsRepository implements IPokemonRepository {
 
     pokemonsRepository: Pokemon[] = []
 
-    async create(pokeId: string): Promise<Pokemon> {
+    async create(pokeId: string, name: string, imageUrl: string, types: string[]): Promise<Pokemon> {
         const pokemon: Pokemon = {
             id: uuidv4(),
             pokeID: pokeId,
+            name,
+            imageUrl,
+            types,
             createdAt: new Date(),
             updatedAt: new Date()
         }

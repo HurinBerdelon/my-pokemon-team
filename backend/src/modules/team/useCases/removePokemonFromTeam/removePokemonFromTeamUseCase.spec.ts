@@ -37,7 +37,7 @@ describe('Remove Pokemon From Team UseCase', () => {
             pokemons: []
         })
 
-        await addPokemonToTeamUseCase.execute('pokeId', teamId)
+        await addPokemonToTeamUseCase.execute('pokeId', 'name', 'image', ['type'], teamId)
 
         const team = await removePokemonFromTeamUseCase.execute(teamId, 'pokeId')
 
@@ -56,8 +56,8 @@ describe('Remove Pokemon From Team UseCase', () => {
             pokemons: []
         })
 
-        await addPokemonToTeamUseCase.execute('pokeId', teamId)
-        await addPokemonToTeamUseCase.execute('pokeId-2', teamId)
+        await addPokemonToTeamUseCase.execute('pokeId', 'name', 'image', ['type'], teamId)
+        await addPokemonToTeamUseCase.execute('pokeId-2', 'name', 'image', ['type'], teamId)
 
         const team = await removePokemonFromTeamUseCase.execute(teamId, 'pokeId')
 
@@ -78,7 +78,7 @@ describe('Remove Pokemon From Team UseCase', () => {
 
         await expect(
             removePokemonFromTeamUseCase.execute(teamId, 'pokeId')
-        ).rejects.toEqual(new AppError(ErrorMessages.pokemonNotFound))
+        ).rejects.toEqual(new AppError(ErrorMessages.pokemonNotFound, 404))
     })
 
     it('should not be able to remove a pokemon from team if the pokemon exists, but is not on the team', async () => {
@@ -92,7 +92,7 @@ describe('Remove Pokemon From Team UseCase', () => {
             pokemons: []
         })
 
-        inMemoryPokemonsRepository.create('pokeId')
+        inMemoryPokemonsRepository.create('pokeId', 'name', 'image', ['type'])
 
         await expect(
             removePokemonFromTeamUseCase.execute(teamId, 'pokeId')

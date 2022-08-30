@@ -23,12 +23,12 @@ export class AuthenticateUserUseCase {
         private tokensRepository: ITokenRepository
     ) { }
 
-    async execute(providerId: string, name: string): Promise<IResponse> {
+    async execute(providerId: string, name: string, imageUrl = undefined): Promise<IResponse> {
 
         let user = await this.usersRepository.findByProviderId(providerId)
 
         if (!user) {
-            await this.usersRepository.create({ name, providerId })
+            await this.usersRepository.create({ name, providerId, imageUrl })
             user = await this.usersRepository.findByProviderId(providerId)
         }
 

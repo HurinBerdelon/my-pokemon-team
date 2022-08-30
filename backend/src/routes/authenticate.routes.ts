@@ -10,6 +10,6 @@ const authenticateUserController = new AuthenticateUserController()
 const refreshUserController = new RefreshUserController()
 const logoutUserController = new LogoutUserController()
 
-authenticateRoutes.post('/sessions', authenticateUserController.handle)
+authenticateRoutes.post('/session', authenticateUserController.handle)
 authenticateRoutes.post('/refresh', refreshUserController.handle)
 authenticateRoutes.delete('/logout', ensureAuthenticated, logoutUserController.handle)

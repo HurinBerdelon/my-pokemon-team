@@ -18,7 +18,7 @@ export class RemovePokemonFromTeamUseCase {
         const pokemon = await this.pokemonsRepository.findByPokeId(pokeId)
 
         if (!pokemon) {
-            throw new AppError(ErrorMessages.pokemonNotFound)
+            throw new AppError(ErrorMessages.pokemonNotFound, 404)
         }
 
         const isPokemonOnTeam = await this.teamsRepository.checkForPokemonOnTeam(pokemon.id, teamId)
