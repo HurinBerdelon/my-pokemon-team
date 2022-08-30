@@ -7,4 +7,5 @@ You can read more about the challenge <a href="https://www.linkedin.com/feed/upd
 Check the README for backend and for frontend for more information:
 
 <a href="./backend/README.md" target="_blank">Backend</a>
+
 <a href="./frontend/README.md" target="_blank">Frontend</a>
