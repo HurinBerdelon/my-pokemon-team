@@ -6,6 +6,10 @@ export const TeamContainer = styled.div`
     margin: 2rem;
     border-radius: 0.25rem;
     border: 1px solid;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     
     h2 {
         text-align: center;
