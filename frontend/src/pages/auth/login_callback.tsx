@@ -5,9 +5,7 @@ import { ThemeProvider } from "styled-components"
 import { Header } from "../../components/Header"
 import { useCurrentTheme } from "../../hooks/useCurrentTheme"
 import { useUser } from "../../hooks/useUser"
-import { LoginCallbackContainer } from "./style"
-
-import style from './style.module.scss'
+import LoginCallbackContainer from "./style"
 
 export default function LoginCallback() {
 
@@ -19,7 +17,7 @@ export default function LoginCallback() {
         if (session) {
             authenticate(session)
         }
-    }, [session])
+    }, [session, authenticate])
 
     return (
         <>

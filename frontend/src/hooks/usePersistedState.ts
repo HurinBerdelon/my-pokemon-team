@@ -14,7 +14,7 @@ export function usePersistedState<T>(key: string, ininitialState: T): ReturnProp
         if (storageValue) {
             setState(JSON.parse(storageValue))
         }
-    }, [])
+    }, [key])
 
     useEffect(() => {
         localStorage.setItem(key, JSON.stringify(state))

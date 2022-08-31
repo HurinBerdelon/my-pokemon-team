@@ -5,7 +5,7 @@ import { ScrollToTop } from "../../components/ScrollToTop";
 import { Team } from "../../components/Team";
 import { useCurrentTheme } from "../../hooks/useCurrentTheme";
 import { useTeam } from "../../hooks/useTeam";
-import { TeamsPageContainer } from "./style";
+import TeamsPageContainer from "./style";
 
 export default function Teams(): JSX.Element {
 

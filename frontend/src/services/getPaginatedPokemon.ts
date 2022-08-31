@@ -43,6 +43,10 @@ export async function getPaginatedPokemon(
                 minimumIntegerDigits: 3,
                 useGrouping: false
             }),
+            pokeID: pokemon.id.toLocaleString('en-US', {
+                minimumIntegerDigits: 3,
+                useGrouping: false
+            }),
             name: pokemon.name,
             imageUrl: pokemon.sprites.other['official-artwork'].front_default,
             types: pokemon.types.map((type: any) => type.type.name),

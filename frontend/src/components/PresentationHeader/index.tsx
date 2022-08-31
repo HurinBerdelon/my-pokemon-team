@@ -25,7 +25,7 @@ export function PresentationHeader(): JSX.Element {
                         {` click here `}
                     </span>
                     to authenticate yourself with
-                    your Google or Facebook account to get access to "my-team" page and recruite your favorite pokemons.
+                    your Google or Facebook account to get access to {`"my-team"`} page and recruite your favorite pokemons.
                 </p>}
         </PresentationHeaderContainer>
     )

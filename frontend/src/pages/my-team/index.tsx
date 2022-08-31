@@ -4,7 +4,7 @@ import { Header } from "../../components/Header";
 import { Pokemons } from "../../components/Pokemons";
 import { MyTeam } from "../../components/MyTeam";
 import { useCurrentTheme } from "../../hooks/useCurrentTheme";
-import { MyTeamPageContainer } from "./style";
+import MyTeamPageContainer from "./style";
 import { GetServerSideProps } from "next";
 import { getPaginatedPokemon } from "../../services/getPaginatedPokemon";
 import { PokemonSchema } from "../../schema/PokemonSchema";
