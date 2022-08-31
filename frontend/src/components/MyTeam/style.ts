@@ -117,6 +117,7 @@ export const MyTeamContainer = styled.section`
 
             h4 {
                 text-align: center;
+                text-transform: capitalize;
                 color: ${props => props.theme.colors.textTwo};
             }
         }

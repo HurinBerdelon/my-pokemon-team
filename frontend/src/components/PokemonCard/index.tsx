@@ -3,6 +3,7 @@ import { CircleNotch, PlusCircle } from "phosphor-react";
 import light from "../../styles/themes/light";
 import { PokemonSchema } from "../../schema/PokemonSchema";
 import { useTeam } from "../../hooks/useTeam";
+import { capitalize } from "../../utils/capitalize";
 
 interface PokemonCardProps {
     pokemon: PokemonSchema
