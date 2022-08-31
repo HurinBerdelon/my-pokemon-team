@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
-import { FilterInput } from "../../components/FilterInput";
 import { Header } from "../../components/Header";
 import { Pokemons } from "../../components/Pokemons";
 import { MyTeam } from "../../components/MyTeam";
@@ -10,9 +9,6 @@ import { GetServerSideProps } from "next";
 import { getPaginatedPokemon } from "../../services/getPaginatedPokemon";
 import { PokemonSchema } from "../../schema/PokemonSchema";
 import { ScrollToTop } from "../../components/ScrollToTop";
-import { useUser } from "../../hooks/useUser";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { parseCookies } from "nookies";
 import { appKeys } from "../../config/AppKeys";
 
@@ -27,14 +23,6 @@ interface MyTeamProps {
 export default function MyTeamPage({ data }: MyTeamProps): JSX.Element {
 
     const { currentTheme } = useCurrentTheme()
-    const { user } = useUser()
-    const router = useRouter()
-
-    useEffect(() => {
-        if (!user) {
-            // router.push('/')
-        }
-    }, [])
 
     return (
         <>
@@ -66,7 +54,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     if (!cookies[appKeys.accessTokenKey] || !cookies[appKeys.refreshTokenKey]) {
         return {
             redirect: {
-                destination: '/'
+                destination: '/',
+                permanent: false
             },
             props: {},
         }

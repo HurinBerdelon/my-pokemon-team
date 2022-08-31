@@ -34,8 +34,11 @@ export class InMemoryTeamsRepository implements ITeamRepository {
             pokemon: {
                 id: pokemonId,
                 pokeID: pokeId,
+                name: 'sampleName',
+                imageUrl: 'image_url',
+                types: [],
                 createdAt: new Date(),
-                updatedAt: new Date()
+                updatedAt: new Date(),
             },
             createdAt: new Date(),
             updatedAt: new Date(),

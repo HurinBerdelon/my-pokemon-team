@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useEffect } from "react";
 import { useUser } from "../../hooks/useUser";
 import { ProfileContainer } from "./style";
 

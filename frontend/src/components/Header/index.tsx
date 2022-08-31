@@ -1,5 +1,4 @@
 import { Popover } from "@headlessui/react";
-import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
 import { LoginModal } from "../LoginModal";

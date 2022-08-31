@@ -42,8 +42,9 @@ export default function About(): JSX.Element {
 
                         </section>
                         <section className="invite">
+                            <h4>Want to Challenge yourself?</h4>
                             <p>
-                                Do you want to see the documentation and/or take place in the challenge of develop your version of this app? Check the
+                                Do you want to see the documentation and/or take place in the challenge of developing your version of this app? Check the
                                 <a
                                     target='_blank'
                                     href="https://www.linkedin.com/posts/fernando-henrique-p-cardozo_meu-time-pokemon-activity-6956323125886087168-ZENK/?utm_source=share&utm_medium=member_desktop"
@@ -51,6 +52,13 @@ export default function About(): JSX.Element {
                                     {` linkedIn `}
                                 </a>
                                 post of the challenge.
+                            </p>
+                        </section>
+
+                        <section className="invite">
+                            <h4>Contact</h4>
+                            <p>
+                                If you have any suggestion or feedback, send me an e-mail at fhpcardozo@gmail.com. I'd appreciate to read it.
                             </p>
                         </section>
                     </main>
