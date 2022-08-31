@@ -66,7 +66,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     if (!cookies[appKeys.accessTokenKey] || !cookies[appKeys.refreshTokenKey]) {
         return {
             redirect: {
-                destination: '/'
+                destination: '/',
+                permanent: false
             },
             props: {},
         }
