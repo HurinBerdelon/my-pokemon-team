@@ -5,6 +5,7 @@ import { availableImageTypes } from "../../../config/availableImageType";
 import { DropImageContainer } from "./style";
 import { FormikErrors } from "formik";
 import { useUser } from "../../../hooks/useUser";
+import Image from "next/image";
 
 interface DropImageProps {
     errors: FormikErrors<{
@@ -74,7 +75,7 @@ export function DropImage({ errors, setFieldValue }: DropImageProps): JSX.Elemen
                             />
                             {isDragActive ?
                                 <p>Drop the file Here</p> :
-                                <p>Click or Drag 'n Drop file here</p>
+                                <p>{`Click or Drag 'n Drop file here`}</p>
                             }
                             {errors.avatar && <div className="errorMessage">{String(errors.avatar)}</div>}
                         </div>

@@ -3,6 +3,7 @@ import { PlusCircle, XCircle } from "phosphor-react";
 import { useTeam } from "../../hooks/useTeam";
 import { PokemonSchema } from "../../schema/PokemonSchema";
 import { toastSuccess } from "../../utils/toastProvider";
+import Image from "next/image";
 
 export function MyTeam(): JSX.Element {
 

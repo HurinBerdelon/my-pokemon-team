@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MyTeamPageContainer = styled.main`
+export default styled.main`
 
     @media (min-width: 720px) {
         display: flex;

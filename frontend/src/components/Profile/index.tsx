@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useUser } from "../../hooks/useUser";
 import { ProfileContainer } from "./style";

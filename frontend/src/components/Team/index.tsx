@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { TeamSchema } from "../../schema/PokemonSchema";
 import { TeamContainer } from "./style";
 

@@ -1,4 +1,5 @@
 import { Popover } from "@headlessui/react";
+import Image from "next/image";
 import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
 import { LoginModal } from "../LoginModal";

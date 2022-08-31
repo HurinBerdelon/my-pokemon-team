@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const TeamsPageContainer = styled.main`
+export default styled.main`
 
     @media (min-width: 540px) {
         display: flex;
