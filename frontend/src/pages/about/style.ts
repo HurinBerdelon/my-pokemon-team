@@ -8,7 +8,10 @@ export const AboutContainer = styled.div`
 
     main {
         flex: 1;
-        padding: 4rem;
+        padding: 1rem 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
         h2 {
             color: ${props => props.theme.colors.textOne}
@@ -21,7 +24,7 @@ export const AboutContainer = styled.div`
 
         .presentation, .history, .invite {
 
-            padding-bottom: 1rem;
+            padding-bottom: 0.5rem;
 
             h4, p {
                 color: ${props => props.theme.colors.textOne}
