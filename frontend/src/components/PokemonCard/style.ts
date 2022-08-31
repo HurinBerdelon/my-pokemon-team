@@ -23,7 +23,16 @@ export const PokemonCardContainer = styled.div`
         }
     }
 
-    .addButton {
+    .loader {      
+        animation: spin 2s ease infinite;
+        
+        @keyframes spin {
+            0% {transform: rotate(0deg)}
+            100% {transform: rotate(360deg)}
+        }
+    }
+
+    .addButton, .loader {
         position: absolute;
         top: -.75rem;
         right: -.75rem;

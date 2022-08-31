@@ -1,13 +1,17 @@
+import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
+import { Loading } from "../Loading";
 import { ActiveLink } from "./ActiveLink";
 import { MenuContainer } from "./style";
 
 export function Menu(): JSX.Element {
 
     const { user } = useUser()
+    const [isLoading, setIsLoading] = useState(false)
 
     return (
         <MenuContainer>
+
             <ActiveLink href='/' activeClassName="active">
                 <a>Home</a>
             </ActiveLink>

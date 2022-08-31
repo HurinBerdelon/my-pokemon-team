@@ -1,5 +1,5 @@
 import { PokemonCardContainer } from "./style";
-import { PlusCircle, XCircle } from "phosphor-react";
+import { CircleNotch, PlusCircle } from "phosphor-react";
 import light from "../../styles/themes/light";
 import { PokemonSchema } from "../../schema/PokemonSchema";
 import { useTeam } from "../../hooks/useTeam";
@@ -7,7 +7,6 @@ import { useTeam } from "../../hooks/useTeam";
 interface PokemonCardProps {
     pokemon: PokemonSchema
     showAddButton?: boolean
-    showRemoveButton?: boolean
     showNumber?: boolean
     showTypes?: boolean
 }
@@ -15,13 +14,12 @@ interface PokemonCardProps {
 export function PokemonCard({
     pokemon,
     showAddButton = false,
-    showRemoveButton = false,
     showNumber = false,
     showTypes = false
 
 }: PokemonCardProps): JSX.Element {
 
-    const { addPokemonToTeam } = useTeam()
+    const { addPokemonToTeam, isLoading, setIsLoading } = useTeam()
 
     return (
         <PokemonCardContainer>
@@ -42,16 +40,23 @@ export function PokemonCard({
             </div>}
 
             {showAddButton
-                && <PlusCircle
-                    weight='fill'
-                    className='addButton'
-                    tabIndex={0}
-                    onClick={() => addPokemonToTeam(pokemon)}
-                />}
-            {showRemoveButton && <XCircle className="closeButton" tabIndex={0} weight='fill' />}
-            {/* <button className='addButtonBottom'>
-                Add
-            </button> */}
+                && (
+                    isLoading
+                        ? <CircleNotch
+                            className='loader'
+                            weight="fill"
+                        />
+                        : <PlusCircle
+                            weight='fill'
+                            className='addButton'
+                            tabIndex={0}
+                            onClick={() => {
+                                setIsLoading(true)
+                                addPokemonToTeam(pokemon)
+                            }}
+                        />
+                )
+            }
         </PokemonCardContainer>
     )
 }

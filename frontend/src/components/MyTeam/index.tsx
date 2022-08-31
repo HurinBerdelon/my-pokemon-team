@@ -1,14 +1,13 @@
 import { MyTeamContainer } from "./style";
-import { PlusCircle, XCircle } from "phosphor-react";
+import { CircleNotch, PlusCircle, XCircle } from "phosphor-react";
 import { useTeam } from "../../hooks/useTeam";
 import { PokemonSchema } from "../../schema/PokemonSchema";
 import { toastSuccess } from "../../utils/toastProvider";
-import Image from "next/image";
 
 export function MyTeam(): JSX.Element {
 
     const { removePokemonFromTeam } = useTeam()
-    const { myTeam } = useTeam()
+    const { myTeam, isLoading, setIsLoading } = useTeam()
 
     return (
         <MyTeamContainer>
@@ -40,12 +39,21 @@ export function MyTeam(): JSX.Element {
 
                 {myTeam?.pokemons.map((pokemon: PokemonSchema) => (
                     <div className="pokemonContainer" key={pokemon.id}>
-                        <XCircle
-                            className="closeButton"
-                            tabIndex={0}
-                            weight='fill'
-                            onClick={() => removePokemonFromTeam(pokemon)}
-                        />
+                        {isLoading
+                            ? <CircleNotch
+                                className='loader'
+                                weight="fill"
+                            />
+                            : <XCircle
+                                className="closeButton"
+                                tabIndex={0}
+                                weight='fill'
+                                onClick={() => {
+                                    setIsLoading(true)
+                                    removePokemonFromTeam(pokemon)
+                                }}
+                            />
+                        }
 
                         <img src={pokemon.imageUrl} alt={pokemon.name} />
                         <h4>{pokemon.name}</h4>

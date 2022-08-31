@@ -5,10 +5,17 @@ import { availableImageTypes } from "../../config/availableImageType";
 import { DropImage } from "./DropImage";
 import { DeleteAccount } from "./DeleteAccount";
 import { useUser } from "../../hooks/useUser";
+import { useEffect, useState } from "react";
+import { CircleNotch } from "phosphor-react";
 
 export function UpdateProfile(): JSX.Element {
 
     const { user, updateUserImage } = useUser()
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        setIsLoading(false)
+    }, [user])
 
     async function handleSubmit(values: FormikValues): Promise<void> {
         console.log(values.avatar)
@@ -46,7 +53,12 @@ export function UpdateProfile(): JSX.Element {
                         />
                         <div className="outsideDrop">
                             <h2>{user?.name}</h2>
-                            <button className="submitButton" type="submit">Save Avatar</button>
+                            <button className="submitButton" type="submit">
+                                {isLoading
+                                    ? <CircleNotch className='loader' weight="fill" />
+                                    : 'Save Avatar'
+                                }
+                            </button>
                         </div>
                     </Form>
                 )}
