@@ -1,9 +1,6 @@
 import { toast } from 'react-toastify'
+import { capitalize } from './capitalize'
 import 'react-toastify/dist/ReactToastify.min.css'
-
-function capitalize(phrase: string) {
-    return phrase.charAt(0).toUpperCase() + phrase.slice(1)
-}
 
 export function toastSuccess(message: string) {
     toast.success(capitalize(message), {

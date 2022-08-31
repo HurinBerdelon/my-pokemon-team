@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
 import { ActiveLink } from "./ActiveLink";
 import { MenuContainer } from "./style";
@@ -8,6 +9,7 @@ export function Menu(): JSX.Element {
 
     return (
         <MenuContainer>
+
             <ActiveLink href='/' activeClassName="active">
                 <a>Home</a>
             </ActiveLink>

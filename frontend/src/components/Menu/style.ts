@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const MenuContainer = styled.nav`
-    margin-top: 1rem;    
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    height: 100%;
+    margin: 0;
+    padding: 0 1rem;
+    flex-direction: row;  
+    gap: 1rem;
 
     position: relative;
 
@@ -17,11 +19,13 @@ export const MenuContainer = styled.nav`
         }
     }
 
-    @media (min-width: 720px) {
-        height: 100%;
-        margin: 0;
-        padding: 0 1rem;
-        flex-direction: row;  
-        gap: 1rem;
+    @media (max-width: 720px) {
+        flex-direction: column;
+        gap: 0.25rem;
+        margin-top: 1rem;
+
+        a.active {
+            text-underline-offset: 3px;
+        }
     }
 `

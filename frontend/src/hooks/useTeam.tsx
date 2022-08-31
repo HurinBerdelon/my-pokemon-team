@@ -7,8 +7,10 @@ import { useUser } from "./useUser";
 interface TeamContextData {
     myTeam: TeamSchema | undefined
     teams: TeamSchema[] | undefined
+    isLoading: boolean
     addPokemonToTeam: (pokemon: PokemonSchema) => void
     removePokemonFromTeam: (pokemon: PokemonSchema) => void
+    setIsLoading: (isLoading: boolean) => void
 }
 
 interface TeamProviderProps {
@@ -22,6 +24,7 @@ export function TeamProvider({ children }: TeamProviderProps): JSX.Element {
     const { user } = useUser()
     const [myTeam, setMyTeam] = useState<TeamSchema>()
     const [teams, setTeams] = useState<TeamSchema[]>([])
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         if (user) {
@@ -70,6 +73,7 @@ export function TeamProvider({ children }: TeamProviderProps): JSX.Element {
                 userId: response.data.userId,
             })
             toastSuccess(`${pokemon.name} was added to your team!`)
+            setIsLoading(false)
         } catch (error: any) {
             if (error.response.data?.message === "Cannot Add more pokemons to this team") {
                 toastError("Cannot Add more pokemons to this team")
@@ -93,14 +97,17 @@ export function TeamProvider({ children }: TeamProviderProps): JSX.Element {
             userId: response.data.userId
         })
         toastSuccess(`${pokemon.name} was removed from your team!`)
+        setIsLoading(false)
     }
 
     return (
         <TeamContext.Provider value={{
             myTeam,
             teams,
+            isLoading,
             addPokemonToTeam,
             removePokemonFromTeam,
+            setIsLoading
         }}>
             {children}
         </TeamContext.Provider>

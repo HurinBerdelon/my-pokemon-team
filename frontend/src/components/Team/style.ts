@@ -37,6 +37,7 @@ export const TeamContainer = styled.div`
 
             h4 {
                 text-align: center;
+                text-transform: capitalize;
                 color: ${props => props.theme.colors.textOne};
             }
         }
