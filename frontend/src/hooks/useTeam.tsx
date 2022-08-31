@@ -24,9 +24,7 @@ export function TeamProvider({ children }: TeamProviderProps): JSX.Element {
     const [teams, setTeams] = useState<TeamSchema[]>([])
 
     useEffect(() => {
-
         if (user) {
-
             setMyTeam({
                 id: user.team.id,
                 pokemons: user.team.pokemons.map(item => item.pokemon),
@@ -55,7 +53,7 @@ export function TeamProvider({ children }: TeamProviderProps): JSX.Element {
 
                 })
             })
-    }, [myTeam])
+    }, [])
 
     async function addPokemonToTeam(pokemon: PokemonSchema) {
         try {
