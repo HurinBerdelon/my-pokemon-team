@@ -1,5 +1,6 @@
 import { FormikValues } from "formik"
 import { Session } from "next-auth"
+import { signOut } from "next-auth/react"
 import { useRouter } from "next/router"
 import { destroyCookie, parseCookies, setCookie } from "nookies"
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
@@ -71,6 +72,7 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
         setUser(undefined)
         destroyCookie(undefined, appKeys.refreshTokenKey, { path: '/' })
         destroyCookie(undefined, appKeys.accessTokenKey, { path: '/' })
+        signOut()
         router.push('/')
     }
 
