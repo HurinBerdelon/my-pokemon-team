@@ -1,12 +1,10 @@
 import { FormikValues } from "formik"
 import { Session } from "next-auth"
-import { signOut } from "next-auth/react"
 import { useRouter } from "next/router"
 import { destroyCookie, parseCookies, setCookie } from "nookies"
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
-import { toast } from "react-toastify"
 import { appKeys } from "../config/AppKeys"
-import { UserResponseProps, UserSchema } from "../schema/UserSchema"
+import { UserResponseProps } from "../schema/UserSchema"
 import { api } from "../services/api"
 import { toastError, toastSuccess } from "../utils/toastProvider"
 

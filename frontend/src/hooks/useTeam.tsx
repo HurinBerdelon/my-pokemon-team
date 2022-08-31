@@ -1,9 +1,5 @@
-import { AxiosError } from "axios";
-import { parseCookies } from "nookies";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { appKeys } from "../config/AppKeys";
 import { PokemonSchema, TeamResponseSchema, TeamSchema } from "../schema/PokemonSchema";
-import { UserResponseProps, UserSchema } from "../schema/UserSchema";
 import { api } from "../services/api";
 import { toastError, toastSuccess, toastWarn } from "../utils/toastProvider";
 import { useUser } from "./useUser";

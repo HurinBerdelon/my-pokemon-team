@@ -53,6 +53,8 @@ export default function About(): JSX.Element {
                                 post of the challenge.
                             </p>
                         </section>
+
+                        {/* TODO: Send feedbacks */}
                     </main>
 
                     <footer>

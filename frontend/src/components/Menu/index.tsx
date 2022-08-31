@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useUser } from "../../hooks/useUser";
 import { ActiveLink } from "./ActiveLink";
 import { MenuContainer } from "./style";
