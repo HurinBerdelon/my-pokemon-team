@@ -11,6 +11,7 @@ interface TeamContextData {
     addPokemonToTeam: (pokemon: PokemonSchema) => void
     removePokemonFromTeam: (pokemon: PokemonSchema) => void
     setIdLoading: (isLoading: string) => void
+    loadTeams: () => void
 }
 
 interface TeamProviderProps {
@@ -37,26 +38,27 @@ export function TeamProvider({ children }: TeamProviderProps): JSX.Element {
     }, [user])
 
     useEffect(() => {
-
-        setTeams([])
-
-        api.get('/team')
-            .then(response => {
-                response.data.map(async (team: TeamResponseSchema) => {
-                    const response = await api.get(`/users/${team.userId}`)
-                    setTeams(prevTeams =>
-                        [
-                            {
-                                ...team,
-                                pokemons: team.pokemons.map(item => item.pokemon),
-                                userName: response.data.name,
-                            },
-                            ...prevTeams
-                        ])
-
-                })
-            })
+        loadTeams()
     }, [])
+
+    async function loadTeams() {
+        setTeams([])
+        const response = await api.get('/team')
+
+        response.data.map(async (team: TeamResponseSchema) => {
+            const response = await api.get(`/users/${team.userId}`)
+            setTeams(prevTeams =>
+                [
+                    {
+                        ...team,
+                        pokemons: team.pokemons.map(item => item.pokemon),
+                        userName: response.data.name,
+                    },
+                    ...prevTeams
+                ])
+
+        })
+    }
 
     async function addPokemonToTeam(pokemon: PokemonSchema) {
         try {
@@ -75,6 +77,7 @@ export function TeamProvider({ children }: TeamProviderProps): JSX.Element {
             toastSuccess(`${pokemon.name} was added to your team!`)
             setIdLoading('')
         } catch (error: any) {
+            setIdLoading('')
             if (error.response.data?.message === "Cannot Add more pokemons to this team") {
                 toastError("Cannot Add more pokemons to this team")
             } else if (error.response.data?.message === 'Pokemon already in this team') {
@@ -107,7 +110,8 @@ export function TeamProvider({ children }: TeamProviderProps): JSX.Element {
             idLoading,
             addPokemonToTeam,
             removePokemonFromTeam,
-            setIdLoading
+            setIdLoading,
+            loadTeams
         }}>
             {children}
         </TeamContext.Provider>
