@@ -7,7 +7,7 @@ import { toastSuccess } from "../../utils/toastProvider";
 export function MyTeam(): JSX.Element {
 
     const { removePokemonFromTeam } = useTeam()
-    const { myTeam, isLoading, setIsLoading } = useTeam()
+    const { myTeam, idLoading, setIdLoading } = useTeam()
 
     return (
         <MyTeamContainer>
@@ -39,7 +39,7 @@ export function MyTeam(): JSX.Element {
 
                 {myTeam?.pokemons.map((pokemon: PokemonSchema) => (
                     <div className="pokemonContainer" key={pokemon.id}>
-                        {isLoading
+                        {idLoading === pokemon.id
                             ? <CircleNotch
                                 className='loader'
                                 weight="fill"
@@ -49,7 +49,7 @@ export function MyTeam(): JSX.Element {
                                 tabIndex={0}
                                 weight='fill'
                                 onClick={() => {
-                                    setIsLoading(true)
+                                    setIdLoading(pokemon.id)
                                     removePokemonFromTeam(pokemon)
                                 }}
                             />
