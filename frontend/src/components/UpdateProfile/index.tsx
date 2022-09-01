@@ -18,8 +18,7 @@ export function UpdateProfile(): JSX.Element {
     }, [user])
 
     async function handleSubmit(values: FormikValues): Promise<void> {
-        console.log(values.avatar)
-
+        setIsLoading(true)
         updateUserImage(values)
     }
 
