@@ -7,14 +7,21 @@ import { toastSuccess } from "../../utils/toastProvider";
 export function MyTeam(): JSX.Element {
 
     const { removePokemonFromTeam } = useTeam()
-    const { myTeam, idLoading, setIdLoading } = useTeam()
+    const { myTeam, idLoading, setIdLoading, loadTeams } = useTeam()
 
     return (
         <MyTeamContainer>
             <h2>
                 My Team
                 <span>{`${myTeam?.pokemons.length}/6`}</span>
-                <button onClick={() => toastSuccess('Team saved!')}>Save</button>
+                <button
+                    onClick={() => {
+                        toastSuccess('Team saved!')
+                        loadTeams()
+                    }}
+                >
+                    Save
+                </button>
             </h2>
 
             {myTeam?.pokemons.length === 0 &&
