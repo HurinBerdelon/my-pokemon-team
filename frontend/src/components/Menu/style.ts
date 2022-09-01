@@ -12,16 +12,10 @@ export const MenuContainer = styled.nav`
 
     a {
         font-size: 1.25rem;
-        color: ${props => props.theme.colors.textTwo};
-        transition: 0.2s;
 
         &.active {
             text-decoration: underline;
             text-underline-offset: 10px;
-        }
-
-        &:active {
-            filter: brightness(0.8);
         }
     }
 
