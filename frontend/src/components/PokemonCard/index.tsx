@@ -20,7 +20,7 @@ export function PokemonCard({
 
 }: PokemonCardProps): JSX.Element {
 
-    const { addPokemonToTeam, isLoading, setIsLoading } = useTeam()
+    const { addPokemonToTeam, idLoading, setIdLoading } = useTeam()
 
     return (
         <PokemonCardContainer>
@@ -42,7 +42,7 @@ export function PokemonCard({
 
             {showAddButton
                 && (
-                    isLoading
+                    idLoading === pokemon.id
                         ? <CircleNotch
                             className='loader'
                             weight="fill"
@@ -52,7 +52,7 @@ export function PokemonCard({
                             className='addButton'
                             tabIndex={0}
                             onClick={() => {
-                                setIsLoading(true)
+                                setIdLoading(pokemon.id)
                                 addPokemonToTeam(pokemon)
                             }}
                         />
