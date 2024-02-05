@@ -3,13 +3,11 @@ import { container } from "tsyringe";
 import { GetAllTeamsUseCase } from "./getAllTeamsUseCase";
 
 export class GetAllTeamsController {
+  async handle(request: Request, response: Response): Promise<Response> {
+    const getAllTeamsUseCase = container.resolve(GetAllTeamsUseCase);
 
-    async handle(request: Request, response: Response): Promise<Response> {
+    const result = await getAllTeamsUseCase.execute();
 
-        const getAllTeamsUseCase = container.resolve(GetAllTeamsUseCase)
-
-        const result = await getAllTeamsUseCase.execute()
-
-        return response.json(result)
-    }
+    return response.json(result);
+  }
 }
