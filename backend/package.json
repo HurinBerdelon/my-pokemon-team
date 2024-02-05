@@ -5,8 +5,8 @@
   "author": "Fernando Cardozo",
   "license": "MIT",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.504.0",
     "@prisma/client": "^4.16.1",
-    "aws-sdk": "^2.1405.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dayjs": "^1.11.8",
