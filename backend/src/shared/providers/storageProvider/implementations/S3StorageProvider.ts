@@ -22,7 +22,7 @@ export class S3StorageProvider implements IStorageProvider {
     const ContentType = mime.getType(originalName);
 
     await this.client.putObject({
-      Bucket: `${process.env.AWS_BUCKET}/${folder}`,
+      Bucket: `${process.env.AWS_BUCKET}`,
       Key: file,
       ACL: "public-read",
       Body: fileContent,
@@ -31,14 +31,14 @@ export class S3StorageProvider implements IStorageProvider {
 
     await fs.promises.unlink(originalName);
 
-    const imageURL = `${process.env.AWS_BUCKET_URL}/${folder}/${file}`;
+    const imageURL = `${process.env.AWS_BUCKET_URL}/${file}`;
 
     return imageURL;
   }
 
   async delete(folder: string, file: string): Promise<void> {
     await this.client.deleteObject({
-      Bucket: `${process.env.AWS_BUCKET}/${folder}`,
+      Bucket: `${process.env.AWS_BUCKET}`,
       Key: file,
     });
   }
